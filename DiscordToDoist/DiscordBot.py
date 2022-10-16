@@ -5,11 +5,16 @@ from discord.ext import commands
 from helpers import read_token
 
 
-async def __load_extensions(bot):
+def __cog_list() -> list[str]:
     for filename in os.listdir("./DiscordToDoist/cogs"):
         if filename.endswith(".py"):
-            await bot.load_extension(f"cogs.{filename[:-3]}")
-            print(f"Loaded {filename} extension")
+            yield f"cogs.{filename[:-3]}"
+
+
+async def __load_extensions(bot) -> None:
+    for cog_name in __cog_list():
+        await bot.load_extension(cog_name)
+        print(f"Loaded {cog_name} extension")
 
 
 def init():

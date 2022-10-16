@@ -10,12 +10,12 @@ class AddingTask(commands.Cog):
         self.bot = bot
 
     @commands.command("echo")
-    async def add(self, ctx, *args):
+    async def echo(self, ctx, *args):
         out = " ".join(args)
         await ctx.send(f"[{out}]")
 
     @commands.command("thread")
-    async def add(self, ctx: Context, *args):
+    async def create_thread(self, ctx: Context, *args):
         name = " ".join(args) if args else "No name"
         await ctx.channel.create_thread(name=name, auto_archive_duration=60, message=ctx.message)
 
