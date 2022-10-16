@@ -1,20 +1,22 @@
 from helpers import read_token
-from todoist_api_python.api import TodoistAPI
-
-
-class ProjectService:
-    def __init__(self, api: TodoistAPI, project_id: str):
-        self.api = api
-        self.project_id = project_id
+from todoist_api_python.api import Project, TodoistAPI
 
 
 class ApiClient:
     def __init__(self) -> None:
         self._api = ApiClient.__get_todoist_api()
-        self._selected_project: ProjectService = None
+        self._selected_project: Project = None
+        self.select_project()
 
     def select_project(self) -> None:
-        raise NotImplemented()
+        p: Project = None
+        proj = next(p for p in self._api.get_projects()
+                    if p.name == "Todoist_Integration_TEST")
+        self._selected_project = proj
+
+    def add_task(self, content: str) -> None:
+        self._api.add_task(
+            content=content, project_id=self._selected_project.id)
 
     @staticmethod
     def __get_todoist_api() -> TodoistAPI:

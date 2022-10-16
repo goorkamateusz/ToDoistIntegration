@@ -8,10 +8,12 @@ from discord.ext import commands
 class AddingTask(commands.Cog):
     def __init__(self, bot: discord, api: ApiClient = Container.apiClient):
         self.bot = bot
+        self.todoist: ApiClient = api
 
-    @commands.command("echo")
-    async def echo(self, ctx, *args):
+    @commands.command("add")
+    async def add_task(self, ctx, *args):
         out = " ".join(args)
+        self.todoist.add_task(out)
         await ctx.send(f"[{out}]")
 
     @commands.command("thread")

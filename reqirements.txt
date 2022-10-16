@@ -1,0 +1,4 @@
+discord==2.0.0
+discord.py==2.0.1
+Flask==2.2.2
+todoist-api-python==2.0.1
