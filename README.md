@@ -15,13 +15,15 @@ Integration ToDoist app with Discord and implemented local voice bot interface.
 
 Create file with all private data to connect ToDoist and Discord bot.
 
-`src/config_priv.py`
-```py
-client_id = ""
-client_secret = ""
-scope = ""
-discord_token = ""
-todoist_token = ""
+`~config.json`
+```json
+{
+    "client_id": "",
+    "client_secret": "",
+    "scope": "",
+    "discord_token": "",
+    "todoist_token": ""
+}
 ```
 
 ## Author

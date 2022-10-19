@@ -1,5 +1,5 @@
 from todoist_api_python.api import Project, TodoistAPI
-from src.config_priv import todoist_token
+from src.config import todoist_token
 
 
 class ApiClient:
@@ -20,9 +20,8 @@ class ApiClient:
 
     @staticmethod
     def __get_todoist_api() -> TodoistAPI:
-        api = TodoistAPI(todoist_token)
-
         try:
+            api = TodoistAPI(todoist_token)
             return api
         except Exception as error:
             raise Exception(error)

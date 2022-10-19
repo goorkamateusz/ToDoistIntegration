@@ -1,0 +1,6 @@
+# To ensure app dependencies are ported from your virtual environment/host machine into your container, run 'pip freeze > requirements.txt' in the terminal to overwrite this file
+gunicorn==20.1.0
+Flask==2.2.2
+discord==2.0.0
+discord.py==2.0.1
+todoist-api-python==2.0.1

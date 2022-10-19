@@ -2,7 +2,7 @@ import asyncio
 import os
 import discord
 from discord.ext import commands
-from src.config_priv import discord_token
+from src.config import discord_token
 
 
 def __cog_list() -> list[str]:
