@@ -2,13 +2,13 @@ import asyncio
 import os
 import discord
 from discord.ext import commands
-from helpers import read_token
+from config_priv import discord_token
 
 
 def __cog_list() -> list[str]:
     for filename in os.listdir("./DiscordToDoist/cogs"):
         if filename.endswith(".py"):
-            yield f"cogs.{filename[:-3]}"
+            yield f"DiscordToDoist.cogs.{filename[:-3]}"
 
 
 async def __load_extensions(bot) -> None:
@@ -23,5 +23,4 @@ def init():
 
     asyncio.run(__load_extensions(bot))
 
-    token = read_token("~discord-token")
-    bot.run(token)
+    bot.run(discord_token)

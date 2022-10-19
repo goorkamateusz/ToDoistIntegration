@@ -1,5 +1,5 @@
-from helpers import read_token
 from todoist_api_python.api import Project, TodoistAPI
+from config_priv import todoist_token
 
 
 class ApiClient:
@@ -20,8 +20,7 @@ class ApiClient:
 
     @staticmethod
     def __get_todoist_api() -> TodoistAPI:
-        token = read_token("~token")
-        api = TodoistAPI(token)
+        api = TodoistAPI(todoist_token)
 
         try:
             return api
