@@ -1,0 +1,11 @@
+name: Deploy
+on:
+  push:
+    branches:
+    - develop
+    - master
+jobs:
+  Deploy:
+    runs-on: self-hosted
+    steps:
+      - run: echo "Uruchomiłeeeeeeeem" > xyz_test.txt
