@@ -1,6 +1,6 @@
 from flask import Flask, Response, jsonify, redirect, render_template, request
-from WebhookServer.utilies import log
-from config_priv import client_id, client_secret, scope
+from src.WebhookServer.utils import log
+from src.config_priv import client_id, client_secret, scope
 import requests
 
 app = Flask(__name__)

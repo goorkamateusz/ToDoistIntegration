@@ -1,9 +1,9 @@
 import discord
 from discord.ext.commands.context import Context
 from discord.ext import commands
-from DiscordToDoist.ApiClient import ApiClient
-from DiscordToDoist.Container import Container
 
+from src.DiscordToDoist.ApiClient import ApiClient
+from src.DiscordToDoist.Container import Container
 
 class AddingTask(commands.Cog):
     def __init__(self, bot: discord, api: ApiClient = Container.apiClient):

@@ -1,9 +1,21 @@
-# DiscordToDoist
+# ToDoist Integration
+
+[WIP]
+
+Integration ToDoist app with Discord and implemented local voice bot interface.
+
+## Table of content
+
+- [ToDoist Integration](#todoist-integration)
+  - [Table of content](#table-of-content)
+  - [Usage](#usage)
+  - [Author](#author)
 
 ## Usage
 
-Create file `config_priv.py` with all private data.
+Create file with all private data to connect ToDoist and Discord bot.
 
+`src/config_priv.py`
 ```py
 client_id = ""
 client_secret = ""
@@ -11,3 +23,7 @@ scope = ""
 discord_token = ""
 todoist_token = ""
 ```
+
+## Author
+
+Górka Mateusz

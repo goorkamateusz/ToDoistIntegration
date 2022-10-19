@@ -1,5 +1,5 @@
 from todoist_api_python.api import Project, TodoistAPI
-from config_priv import todoist_token
+from src.config_priv import todoist_token
 
 
 class ApiClient:

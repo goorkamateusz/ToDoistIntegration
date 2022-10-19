@@ -2,13 +2,14 @@ import asyncio
 import os
 import discord
 from discord.ext import commands
-from config_priv import discord_token
+from src.config_priv import discord_token
 
 
 def __cog_list() -> list[str]:
-    for filename in os.listdir("./DiscordToDoist/cogs"):
+    absolute_path = os.path.dirname(__file__)
+    for filename in os.listdir(f"{absolute_path}/cogs"):
         if filename.endswith(".py"):
-            yield f"DiscordToDoist.cogs.{filename[:-3]}"
+            yield f"src.DiscordToDoist.cogs.{filename[:-3]}"
 
 
 async def __load_extensions(bot) -> None:
