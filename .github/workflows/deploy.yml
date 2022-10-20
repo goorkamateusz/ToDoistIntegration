@@ -12,5 +12,4 @@ jobs:
         with:
           fetch-depth: 1
           clean: false
-      - run: docker build -t todoist-integration:latest .
-      - run: docker run -d --name todoist-integration --restart always todoist-integration 
+      - run: ./bash/refresh-docker.sh
