@@ -1,4 +1,4 @@
-from src.WebhookServer.app import app
+from src.WebhookServer.app import main
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()

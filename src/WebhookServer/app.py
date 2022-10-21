@@ -29,3 +29,7 @@ def access_token():
 def payload():
     log()
     return jsonify({'status': 'accepted', 'health': 'ok'}), 200
+
+
+def main() -> None:
+    app.run(debug=True)

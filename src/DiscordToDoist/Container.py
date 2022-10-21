@@ -2,8 +2,8 @@ from src.DiscordToDoist.ApiClient import ApiClient
 
 
 class Logger:
-    def log(self):
-        print("logged")
+    def log(self, msg: str):
+        print(f"[{msg}]")
 
 
 class Container:
