@@ -4,3 +4,4 @@ Flask==2.2.2
 discord==2.0.0
 discord.py==2.0.1
 todoist-api-python==2.0.1
+pymongo==4.3.2

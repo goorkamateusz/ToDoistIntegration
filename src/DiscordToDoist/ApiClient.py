@@ -15,7 +15,7 @@ class ApiClient:
         self._selected_project = proj
 
     def add_task(self, content: str) -> None:
-        self._api.add_task(
+        return self._api.add_task(
             content=content, project_id=self._selected_project.id)
 
     @staticmethod

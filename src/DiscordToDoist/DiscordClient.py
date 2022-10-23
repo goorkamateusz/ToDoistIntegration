@@ -13,7 +13,7 @@ class DiscordClient(discord.Client):
         super().__init__(intents=intents)
 
     async def on_ready(self):
-        print(f'Client {self.user} ready.')
+        self.logger.log(f'Client {self.user} ready.')
 
     async def on_message(self, message: discord.Message):
         if message.author == self.user:
