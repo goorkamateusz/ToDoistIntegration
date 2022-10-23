@@ -1,3 +1,4 @@
+from src.DiscordToDoist.Components.ModifyTask import ModifyTask
 from src.DiscordToDoist.Components.DoneTask import DoneTask
 from src.DiscordToDoist.Components.AddingTask import AddingTask
 from src.DiscordToDoist.Components.ApplicationStatus import ApplicationStatus
@@ -11,5 +12,6 @@ def main() -> None:
     client.components["!test"] = ApplicationStatus(client)
     client.components["!add"] = AddingTask(client)
     client.components["!done"] = DoneTask(client)
+    client.components["!update"] = ModifyTask(client)
 
     client.run(discord_token)
