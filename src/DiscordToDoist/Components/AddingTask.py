@@ -18,4 +18,5 @@ class AddingTask(DiscordComponent):
 
         await msg.add_reaction('🔶')
 
-        db.insert_one(TaskMsg(msg.id, thread.id, task.id).to_dict())
+        entity = TaskMsg(channel.id, msg.id, thread.id, task.id)
+        db.insert_one(entity.to_dict())

@@ -14,9 +14,12 @@ class ApiClient:
                     if p.name == "Todoist_Integration_TEST")
         self._selected_project = proj
 
-    def add_task(self, content: str) -> None:
+    def add_task(self, content: str):
         return self._api.add_task(
             content=content, project_id=self._selected_project.id)
+
+    def close_task(self, task_id: str):
+        return self._api.close_task(task_id)
 
     @staticmethod
     def __get_todoist_api() -> TodoistAPI:
