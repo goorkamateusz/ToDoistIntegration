@@ -3,17 +3,20 @@ from typing import Dict
 import discord
 
 from src.DiscordToDoist.Container import Container, Logger
+from src.WebhookServer.WebController import web_server
 
 
 class DiscordClient(discord.Client):
     def __init__(self, logger: Logger = Container.logger) -> None:
         self.components: Dict[str, DiscordComponent] = {}
+        self.tasks = []
         self.logger = logger
         intents = discord.Intents.all()
         super().__init__(intents=intents)
 
     async def on_ready(self):
         self.logger.log(f'Client {self.user} ready.')
+        self.__create_tasks()
 
     async def on_message(self, message: discord.Message):
         if message.author == self.user:
@@ -24,6 +27,9 @@ class DiscordClient(discord.Client):
 
         if prefix in self.components:
             await self.components[prefix].process(message, content)
+
+    def __create_tasks(self):
+        self.loop.create_task(web_server())
 
 
 class DiscordComponent:
