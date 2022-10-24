@@ -1,11 +1,8 @@
 from aiohttp import web
-from discord.ext import tasks
 import requests
 
 from src.config import client_id, scope, client_secret
-from src.WebhookServer.utils import log
 
-app = web.Application()
 routes = web.RouteTableDef()
 
 
@@ -41,14 +38,3 @@ async def payload(request: web.Request):
         json = await r.json()
     print(json)
     return web.Response(status=200)
-
-
-app.add_routes(routes)
-
-
-@tasks.loop()
-async def web_server():
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, host='0.0.0.0', port=5100)
-    await site.start()

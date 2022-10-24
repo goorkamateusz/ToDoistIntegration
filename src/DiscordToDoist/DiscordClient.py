@@ -3,7 +3,7 @@ from typing import Dict
 import discord
 
 from src.DiscordToDoist.Container import Container, Logger
-from src.WebhookServer.WebController import web_server
+from src.WebhookServer.WebServer import web_server
 
 
 class DiscordClient(discord.Client):
