@@ -2,7 +2,7 @@ name: Deploy
 on:
   push:
     branches:
-    - master
+    - production
 jobs:
   Deploy:
     runs-on: self-hosted
