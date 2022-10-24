@@ -1,5 +1,4 @@
 import json
-from flask import request
 
 
 def log():
