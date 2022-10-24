@@ -8,7 +8,7 @@ routes = web.RouteTableDef()
 
 @routes.get('/')
 async def welcome(request: web.Request):
-    return web.Response(text="Hello world")
+    return web.Response(text="App work correctly.\nSorce code: https://github.com/goorkamateusz/ToDoistIntegration")
 
 
 @routes.get("/login")
