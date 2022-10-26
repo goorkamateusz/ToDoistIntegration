@@ -1,15 +1,24 @@
+from asyncio import Queue
 from aiohttp import web
 from discord.ext import tasks
 
-from src.WebhookServer.WebController import routes
+from src.WebhookServer.WebController import WebController
 from src.DiscordToDoist.Container import Container, Logger
-
-app = web.Application()
-app.add_routes(routes)
 
 
 @tasks.loop()
-async def web_server():
+async def web_server(queue: Queue):
+
+    app = web.Application()
+    controller = WebController(queue)
+
+    app.add_routes([
+        web.get("/", controller.welcome),
+        web.get("/login", controller.login),
+        web.get("/access_token", controller.access_token),
+        web.post("/payload", controller.payload),
+    ])
+
     logger: Logger = Container.logger
     runner = web.AppRunner(app)
     await runner.setup()

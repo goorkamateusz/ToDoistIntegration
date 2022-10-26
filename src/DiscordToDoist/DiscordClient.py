@@ -1,6 +1,9 @@
 from abc import abstractclassmethod
 from typing import Dict
 import discord
+from asyncio import Queue
+
+from discord.ext import tasks
 
 from src.DiscordToDoist.Container import Container, Logger
 from src.WebhookServer.WebServer import web_server
@@ -11,6 +14,7 @@ class DiscordClient(discord.Client):
         self.components: Dict[str, DiscordComponent] = {}
         self.tasks = []
         self.logger = logger
+        self._taskQueue = Queue()
         intents = discord.Intents.all()
         super().__init__(intents=intents)
 
@@ -29,7 +33,14 @@ class DiscordClient(discord.Client):
             await self.components[prefix].process(message, content)
 
     def __create_tasks(self):
-        self.loop.create_task(web_server())
+        self.loop.create_task(web_server(self._taskQueue))
+        self.loop.create_task(self._test(self._taskQueue))
+
+    @tasks.loop()
+    async def _test(self, queue: Queue):
+        while True:
+            e = await queue.get()
+            print(e)
 
 
 class DiscordComponent:
