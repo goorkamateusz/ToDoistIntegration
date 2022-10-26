@@ -7,7 +7,7 @@ from src.config import client_id, scope, client_secret
 
 class WebController:
     def __init__(self, queue: Queue) -> None:
-        self._queue = queue
+        self._eventQueue = queue
         pass
 
     async def welcome(self, request: web.Request):
@@ -29,10 +29,8 @@ class WebController:
 
     async def payload(self, request: web.Request):
         r = request
-        print(f"{r.method} / {r.url}")
         if r.body_exists:
             await r.read()
             json = await r.json()
-            print(json)
-            await self._queue.put(json)
+            await self._eventQueue.put(json)
         return web.Response(status=200)

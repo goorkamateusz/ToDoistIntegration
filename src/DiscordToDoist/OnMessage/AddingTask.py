@@ -3,10 +3,10 @@ from src.DiscordToDoist.Reactions import managed_msg_reaction
 from src.Database.TaskMsg import TaskMsg
 from src.DiscordToDoist.Container import Container
 from src.Database.Database import Database
-from src.DiscordToDoist.DiscordClient import DiscordComponent
+from src.DiscordToDoist.DiscordClient import OnMessageComponent
 
 
-class AddingTask(DiscordComponent):
+class AddingTask(OnMessageComponent):
     async def process(self, msg: discord.Message, content: str) -> None:
         # todo make dependency injection
         todoist = Container.apiClient
