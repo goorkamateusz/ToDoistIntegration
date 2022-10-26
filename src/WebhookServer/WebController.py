@@ -28,9 +28,8 @@ class WebController:
         return web.Response(text="Verified")
 
     async def payload(self, request: web.Request):
-        r = request
-        if r.body_exists:
-            await r.read()
-            json = await r.json()
+        if request.body_exists:
+            await request.read()
+            json = await request.json()
             await self._eventQueue.put(json)
         return web.Response(status=200)

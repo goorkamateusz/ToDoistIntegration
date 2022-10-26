@@ -7,15 +7,16 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class DoneTask(OnMessageComponent):
-    async def process(self, msg: discord.Message, content: str) -> None:
-        # todo make dependency injection
-        todoist = Container.apiClient
 
-        db = Database().discord
-        select = db.find_one({"discord_thread_id": msg.channel.id})
+    def __init__(self, todoist=Container.apiClient, db=Container.database):
+        self.todoist = todoist
+        self.db: Database = db.discord
+
+    async def process(self, msg: discord.Message, content: str) -> None:
+        select = self.db.find_one({"discord_thread_id": msg.channel.id})
         entity: TaskMsg = TaskMsg.from_dict(select)
 
-        if todoist.close_task(entity.todoist_task_id):
+        if self.todoist.close_task(entity.todoist_task_id):
             thread = self.client.get_channel(entity.discord_thread_id)
             await thread.send(f"Zamknięto zadanie {done_reaction}")
 

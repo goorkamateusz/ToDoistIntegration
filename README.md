@@ -22,7 +22,9 @@ Create file with all private data to connect ToDoist and Discord bot.
     "client_secret": "",
     "scope": "",
     "discord_token": "",
-    "todoist_token": ""
+    "todoist_token": "",
+    "connection_string": "",
+    "logging_file": ""
 }
 ```
 
