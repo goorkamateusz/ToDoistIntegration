@@ -5,7 +5,7 @@ from asyncio import Queue
 
 from discord.ext import tasks
 
-from src.DiscordToDoist.Container import Container, Logger
+from src.Discord.Container import Container, Logger
 from src.WebhookServer.WebServer import web_server
 
 

@@ -1,9 +1,9 @@
-from src.DiscordToDoist.OnMessage.ModifyTask import ModifyTask
-from src.DiscordToDoist.OnMessage.DoneTask import DoneTask
-from src.DiscordToDoist.OnMessage.AddingTask import AddingTask
-from src.DiscordToDoist.OnMessage.ApplicationStatus import ApplicationStatus
-from src.DiscordToDoist.OnNotification.OnComplete import OnComplete
-from src.DiscordToDoist.DiscordClient import DiscordClient
+from src.Discord.OnMessage.ModifyTask import ModifyTask
+from src.Discord.OnMessage.DoneTask import DoneTask
+from src.Discord.OnMessage.AddingTask import AddingTask
+from src.Discord.OnMessage.ApplicationStatus import ApplicationStatus
+from src.Discord.OnNotification.OnComplete import OnComplete
+from src.Discord.DiscordClient import DiscordClient
 from src.config import discord_token
 
 

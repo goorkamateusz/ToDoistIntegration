@@ -1,4 +1,4 @@
-from src.DiscordToDoist.ApiClient import ApiClient
+from src.ToDoist.ApiClient import ApiClient
 
 
 class Logger:

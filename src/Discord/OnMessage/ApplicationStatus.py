@@ -1,6 +1,6 @@
 import discord
 
-from src.DiscordToDoist.DiscordClient import OnMessageComponent
+from src.Discord.DiscordClient import OnMessageComponent
 
 
 class ApplicationStatus(OnMessageComponent):

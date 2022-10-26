@@ -1,4 +1,4 @@
-from src.DiscordToDoist.DiscordBot import main
+from src.Discord.DiscordBot import main
 
 if __name__ == "__main__":
     main()

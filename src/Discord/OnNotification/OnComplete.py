@@ -1,4 +1,4 @@
-from src.DiscordToDoist.DiscordClient import OnNotificationComponent
+from src.Discord.DiscordClient import OnNotificationComponent
 
 
 class OnComplete(OnNotificationComponent):

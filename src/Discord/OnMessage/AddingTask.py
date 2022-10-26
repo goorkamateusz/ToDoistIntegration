@@ -1,9 +1,9 @@
 import discord
-from src.DiscordToDoist.Reactions import managed_msg_reaction
+from src.Discord.Reactions import managed_msg_reaction
 from src.Database.TaskMsg import TaskMsg
-from src.DiscordToDoist.Container import Container
+from src.Discord.Container import Container
 from src.Database.Database import Database
-from src.DiscordToDoist.DiscordClient import OnMessageComponent
+from src.Discord.DiscordClient import OnMessageComponent
 
 
 class AddingTask(OnMessageComponent):

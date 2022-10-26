@@ -3,7 +3,7 @@ from aiohttp import web
 from discord.ext import tasks
 
 from src.WebhookServer.WebController import WebController
-from src.DiscordToDoist.Container import Container, Logger
+from src.Discord.Container import Container, Logger
 
 
 @tasks.loop()
