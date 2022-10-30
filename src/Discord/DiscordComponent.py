@@ -11,19 +11,19 @@ class DiscordClient:
 
 
 class DiscordComponent:
-    def __init__(self, client: DiscordClient, todoist=Container.apiClient, db=Container.database):
-        self.client = client
-        self.todoist = todoist
+    def __init__(self, client, todoist=Container.apiClient, db=Container.database):
+        self.client: DiscordClient = client
+        self.todoist: ApiClient = todoist
         self.db = db.discord
+
+    def current_channel(self, msg: discord.Message):
+        return self.client.get_channel(msg.channel.id)
 
 
 class OnMessageComponent(DiscordComponent):
     @abstractclassmethod
     async def process(self, msg: discord.Message, content: str) -> None:
         raise NotImplemented()
-
-    def current_channel(self, msg: discord.Message):
-        return self.client.get_channel(msg.channel.id)
 
 
 class OnNotificationComponent(DiscordComponent):
