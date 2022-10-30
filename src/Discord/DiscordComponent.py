@@ -14,7 +14,7 @@ class DiscordComponent:
                  client,
                  todoist=Container.apiClient,
                  db=Container.database):
-        self.client: DiscordClient = client
+        self.client: discord.Client = client
         self.todoist: ApiClient = todoist
         self.db = db.discord
 
