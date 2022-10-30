@@ -1,5 +1,4 @@
 import logging
-import discord
 from typing import Any, Dict
 from src.Database.TaskMsg import TaskMsg
 from src.Discord.Reactions import done_reaction
@@ -14,14 +13,10 @@ class OnComplete(OnNotificationComponent):
         select = self.db.find_one({"todoist_task_id": id})
 
         if select:
-            record: TaskMsg = TaskMsg.from_dict(select)
-
-            channel = self.client.get_channel(record.discord_channel_id)
-            msg = channel.get_partial_message(record.discord_msg_id)
-
-            await msg.add_reaction(done_reaction)
-
+            entity: TaskMsg = TaskMsg.from_dict(select)
+            await self.report(entity,
+                              communicate="Zamknięto zadanie w aplikacji ToDoist",
+                              reaction=done_reaction)
             logging.info(f"Notification processed successfully | {id}")
-            return
-
-        logging.info(f"Task not registered | {id}")
+        else:
+            logging.info(f"Task not registered | {id}")
