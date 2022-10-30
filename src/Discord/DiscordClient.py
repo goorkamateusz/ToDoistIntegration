@@ -39,8 +39,11 @@ class DiscordClient(discord.Client):
     @tasks.loop()
     async def _process_events(self, queue: Queue):
         while True:
-            event = await queue.get()
-            event_type = event["event_name"]
-            logging.info(f"Processed notification | {event_type}")
-            if event_type in self.on_notification:
-                await self.on_notification[event_type].process(event)
+            try:
+                event = await queue.get()
+                event_type = event["event_name"]
+                logging.info(f"Processed notification | {event_type}")
+                if event_type in self.on_notification:
+                    await self.on_notification[event_type].process(event)
+            except Exception as e:
+                logging.error(e)
