@@ -10,10 +10,10 @@ class OnComplete(OnNotificationComponent):
         event_data: Dict[str, Any] = event["event_data"]
 
         id = event_data["id"]
-        select = self.db_tasks.find_one({"todoist_task_id": id})
+        entity: TaskEntity = self.db.find_one(
+            TaskEntity, {"todoist_task_id": id})
 
-        if select:
-            entity: TaskEntity = TaskEntity.from_dict(select)
+        if entity:
             communicate = "Zamknięto zadanie w aplikacji ToDoist"
             await self.report(entity,
                               communicate=communicate,

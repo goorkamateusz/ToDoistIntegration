@@ -6,8 +6,8 @@ from src.Discord.DiscordClient import OnMessageComponent
 class ModifyTask(OnMessageComponent):
 
     async def process(self, msg: discord.Message, content: str) -> None:
-        select = self.db_tasks.find_one({"discord_thread_id": msg.channel.id})
-        entity: TaskEntity = TaskEntity.from_dict(select)
+        entity: TaskEntity = self.db.find_one(
+            TaskEntity, {"discord_thread_id": msg.channel.id})
 
         if self.todoist.update_task(entity.todoist_task_id, content):
             await self.report(entity, f"Zmodyfikowano zadanie na: {content}")

@@ -7,8 +7,8 @@ from src.Discord.DiscordClient import OnMessageComponent
 class DoneTask(OnMessageComponent):
 
     async def process(self, msg: discord.Message, content: str) -> None:
-        select = self.db_tasks.find_one({"discord_thread_id": msg.channel.id})
-        entity: TaskEntity = TaskEntity.from_dict(select)
+        entity: TaskEntity = self.db.find_one(
+            TaskEntity, {"discord_thread_id": msg.channel.id})
 
         if self.todoist.close_task(entity.todoist_task_id):
             await self.report(entity, "Zamknięto zadanie", done_reaction)

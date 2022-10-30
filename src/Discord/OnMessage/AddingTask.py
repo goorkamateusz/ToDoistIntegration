@@ -19,6 +19,6 @@ class AddingTask(OnMessageComponent):
                             discord_thread_id=thread.id,
                             todoist_task_id=task.id)
 
-        self.db_tasks.insert_one(entity.to_dict())
+        self.db.insert(entity)
 
         await self.report(entity, reaction=managed_msg_reaction)

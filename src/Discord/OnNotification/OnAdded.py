@@ -7,6 +7,7 @@ from src.config import temp_channel_id
 
 
 class OnAdded(OnNotificationComponent):
+
     async def process(self, event) -> None:
         event_data: Dict[str, Any] = event["event_data"]
         task_id = event_data["id"]
@@ -23,8 +24,7 @@ class OnAdded(OnNotificationComponent):
         thread = await channel.create_thread(
             name=content,
             auto_archive_duration=(60 * 24),
-            message=msg
-        )
+            message=msg)
 
         entity = TaskEntity(temp_channel_id, msg.id, thread.id, task_id)
 

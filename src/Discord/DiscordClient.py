@@ -5,7 +5,6 @@ import discord
 import logging
 from src.Discord.DiscordComponent import OnMessageComponent
 from src.Discord.DiscordComponent import OnNotificationComponent
-
 from src.WebhookServer.WebServer import web_server
 
 

@@ -1,6 +1,8 @@
 from asyncio import Task
+from typing import Any, Dict
 import discord
 from abc import abstractclassmethod
+from src.Database.Database import Database
 from src.Discord.Container import Container
 from src.ToDoist.ApiClient import ApiClient
 
@@ -10,13 +12,15 @@ class DiscordClient:
 
 
 class DiscordComponent:
+
     def __init__(self,
                  client,
                  todoist=Container.apiClient,
                  db=Container.database):
         self.client: discord.Client = client
         self.todoist: ApiClient = todoist
-        self.db_tasks = db.tasks
+        self.db: Database = db
+        self.db_tasks = db._tasks  # todo obsolete
 
     def current_channel(self, msg: discord.Message):
         return self.client.get_channel(msg.channel.id)
@@ -40,5 +44,5 @@ class OnMessageComponent(DiscordComponent):
 
 class OnNotificationComponent(DiscordComponent):
     @abstractclassmethod
-    async def process(self, event) -> None:
+    async def process(self, event: Dict[str, Any]) -> None:
         raise NotImplementedError()
