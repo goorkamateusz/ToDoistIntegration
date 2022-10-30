@@ -1,4 +1,5 @@
 import discord
+from src.ToDoist.ApiClient import ApiClient
 from src.Discord.Reactions import managed_msg_reaction
 from src.Database.TaskMsg import TaskMsg
 from src.Discord.Container import Container
@@ -7,10 +8,6 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class AddingTask(OnMessageComponent):
-
-    def __init__(self, todoist=Container.apiClient, db=Container.database):
-        self.todoist = todoist
-        self.db: Database = db.discord
 
     async def process(self, msg: discord.Message, content: str) -> None:
         task = self.todoist.add_task(content)

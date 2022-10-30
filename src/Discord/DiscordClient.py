@@ -1,9 +1,9 @@
-from abc import abstractclassmethod
 from typing import Dict
 from asyncio import Queue
 from discord.ext import tasks
 import discord
 import logging
+from src.Discord.DiscordComponent import OnMessageComponent, OnNotificationComponent
 
 from src.WebhookServer.WebServer import web_server
 
@@ -43,23 +43,3 @@ class DiscordClient(discord.Client):
             logging.info(f"Processed notification | {event_type}")
             if event_type in self.on_notification:
                 await self.on_notification[event_type].process(event)
-
-
-class DiscordComponent:
-    def __init__(self, client: DiscordClient) -> None:
-        self.client: DiscordClient = client
-
-
-class OnMessageComponent(DiscordComponent):
-    @abstractclassmethod
-    async def process(self, msg: discord.Message, content: str) -> None:
-        raise NotImplemented()
-
-    def current_channel(self, msg: discord.Message):
-        return self.client.get_channel(msg.channel.id)
-
-
-class OnNotificationComponent(DiscordComponent):
-    @abstractclassmethod
-    async def process(self, event) -> None:
-        raise NotImplemented()

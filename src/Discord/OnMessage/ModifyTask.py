@@ -7,10 +7,6 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 class ModifyTask(OnMessageComponent):
 
-    def __init__(self, todoist=Container.apiClient, db=Container.database):
-        self.todoist = todoist
-        self.db: Database = db.discord
-
     async def process(self, msg: discord.Message, content: str) -> None:
         select = self.db.find_one({"discord_thread_id": msg.channel.id})
         entity: TaskMsg = TaskMsg.from_dict(select)
