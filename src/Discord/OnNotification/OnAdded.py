@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Dict
-from src.Database.TaskMsg import TaskMsg
+from src.Database.TaskEntity import TaskEntity
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.Discord.Reactions import managed_msg_reaction
 from src.config import temp_channel_id
@@ -11,7 +11,7 @@ class OnAdded(OnNotificationComponent):
         event_data: Dict[str, Any] = event["event_data"]
         task_id = event_data["id"]
 
-        if self.db.find_one({"todoist_task_id": task_id}):
+        if self.db_tasks.find_one({"todoist_task_id": task_id}):
             logging.info(f"Task have been added yet | {task_id}")
             return
 
@@ -26,9 +26,9 @@ class OnAdded(OnNotificationComponent):
             message=msg
         )
 
-        entity = TaskMsg(temp_channel_id, msg.id, thread.id, task_id)
+        entity = TaskEntity(temp_channel_id, msg.id, thread.id, task_id)
 
-        self.db.insert_one(entity.to_dict())
+        self.db_tasks.insert_one(entity.to_dict())
 
         communicate = "Dodano zadanie przez aplikację"
         await self.report(entity, communicate, managed_msg_reaction)

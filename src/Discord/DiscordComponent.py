@@ -16,7 +16,7 @@ class DiscordComponent:
                  db=Container.database):
         self.client: discord.Client = client
         self.todoist: ApiClient = todoist
-        self.db = db.discord
+        self.db_tasks = db.tasks
 
     def current_channel(self, msg: discord.Message):
         return self.client.get_channel(msg.channel.id)

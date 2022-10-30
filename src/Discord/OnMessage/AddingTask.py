@@ -1,6 +1,6 @@
 import discord
 from src.Discord.Reactions import managed_msg_reaction
-from src.Database.TaskMsg import TaskMsg
+from src.Database.TaskEntity import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
 
 
@@ -14,7 +14,11 @@ class AddingTask(OnMessageComponent):
             auto_archive_duration=(60 * 24),
             message=msg)
 
-        entity = TaskMsg(msg.channel.id, msg.id, thread.id, task.id)
-        self.db.insert_one(entity.to_dict())
+        entity = TaskEntity(discord_channel_id=msg.channel.id,
+                            discord_msg_id=msg.id,
+                            discord_thread_id=thread.id,
+                            todoist_task_id=task.id)
+
+        self.db_tasks.insert_one(entity.to_dict())
 
         await self.report(entity, reaction=managed_msg_reaction)

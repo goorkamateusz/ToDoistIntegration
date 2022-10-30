@@ -4,7 +4,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class TaskMsg:
+class TaskEntity:
     discord_channel_id: str
     discord_msg_id: str
     discord_thread_id: str

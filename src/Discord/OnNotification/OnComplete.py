@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Dict
-from src.Database.TaskMsg import TaskMsg
+from src.Database.TaskEntity import TaskEntity
 from src.Discord.Reactions import done_reaction
 from src.Discord.DiscordClient import OnNotificationComponent
 
@@ -10,10 +10,10 @@ class OnComplete(OnNotificationComponent):
         event_data: Dict[str, Any] = event["event_data"]
 
         id = event_data["id"]
-        select = self.db.find_one({"todoist_task_id": id})
+        select = self.db_tasks.find_one({"todoist_task_id": id})
 
         if select:
-            entity: TaskMsg = TaskMsg.from_dict(select)
+            entity: TaskEntity = TaskEntity.from_dict(select)
             communicate = "Zamknięto zadanie w aplikacji ToDoist"
             await self.report(entity,
                               communicate=communicate,
