@@ -13,4 +13,5 @@ class DoneTask(OnMessageComponent):
         if self.todoist.close_task(entity.todoist_task_id):
             await self.report(entity, "Zamknięto zadanie", done_reaction)
         else:
-            await self.report(entity, "Coś poszło nie tak... Nie udało się zamknąć zadania")
+            communicate = "Coś poszło nie tak... Nie udało się zamknąć zadania"
+            await self.report(entity, communicate)

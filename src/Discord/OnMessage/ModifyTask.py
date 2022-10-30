@@ -12,4 +12,5 @@ class ModifyTask(OnMessageComponent):
         if self.todoist.update_task(entity.todoist_task_id, content):
             await self.report(entity, f"Zmodyfikowano zadanie na: {content}")
         else:
-            await self.report(entity, "Coś poszło nie tak... Nie udało się zamknąć zadania")
+            communicate = "Coś poszło nie tak... Nie udało się zamknąć zadania"
+            await self.report(entity, communicate)

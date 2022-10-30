@@ -3,7 +3,6 @@ import discord
 from abc import abstractclassmethod
 from src.Discord.Container import Container
 from src.ToDoist.ApiClient import ApiClient
-from src.Discord.Container import Container
 
 
 class DiscordClient:
@@ -11,7 +10,10 @@ class DiscordClient:
 
 
 class DiscordComponent:
-    def __init__(self, client, todoist=Container.apiClient, db=Container.database):
+    def __init__(self,
+                 client,
+                 todoist=Container.apiClient,
+                 db=Container.database):
         self.client: DiscordClient = client
         self.todoist: ApiClient = todoist
         self.db = db.discord
@@ -33,10 +35,10 @@ class DiscordComponent:
 class OnMessageComponent(DiscordComponent):
     @abstractclassmethod
     async def process(self, msg: discord.Message, content: str) -> None:
-        raise NotImplemented()
+        raise NotImplementedError()
 
 
 class OnNotificationComponent(DiscordComponent):
     @abstractclassmethod
     async def process(self, event) -> None:
-        raise NotImplemented()
+        raise NotImplementedError()

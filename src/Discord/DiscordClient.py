@@ -3,7 +3,8 @@ from asyncio import Queue
 from discord.ext import tasks
 import discord
 import logging
-from src.Discord.DiscordComponent import OnMessageComponent, OnNotificationComponent
+from src.Discord.DiscordComponent import OnMessageComponent
+from src.Discord.DiscordComponent import OnNotificationComponent
 
 from src.WebhookServer.WebServer import web_server
 

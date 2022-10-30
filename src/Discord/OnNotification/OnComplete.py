@@ -14,8 +14,9 @@ class OnComplete(OnNotificationComponent):
 
         if select:
             entity: TaskMsg = TaskMsg.from_dict(select)
+            communicate = "Zamknięto zadanie w aplikacji ToDoist"
             await self.report(entity,
-                              communicate="Zamknięto zadanie w aplikacji ToDoist",
+                              communicate=communicate,
                               reaction=done_reaction)
             logging.info(f"Notification processed successfully | {id}")
         else:

@@ -9,7 +9,6 @@ class ApiClient:
         self.select_project()
 
     def select_project(self) -> None:
-        p: Project = None
         proj = next(p for p in self._api.get_projects()
                     if p.name == "Todoist_Integration_TEST")
         self._selected_project = proj

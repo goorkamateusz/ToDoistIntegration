@@ -3,6 +3,7 @@ from src.Discord.OnMessage.DoneTask import DoneTask
 from src.Discord.OnMessage.AddingTask import AddingTask
 from src.Discord.OnMessage.ApplicationStatus import ApplicationStatus
 from src.Discord.OnNotification.OnComplete import OnComplete
+from src.Discord.OnNotification.OnAdded import OnAdded
 from src.Discord.DiscordClient import DiscordClient
 from src.config import discord_token
 
@@ -16,5 +17,6 @@ def main() -> None:
     client.on_messages["!update"] = ModifyTask(client)
 
     client.on_notification["item:completed"] = OnComplete(client)
+    client.on_notification["item:added"] = OnAdded(client)
 
     client.run(discord_token)

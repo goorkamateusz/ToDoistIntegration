@@ -11,11 +11,13 @@ class WebController:
         pass
 
     async def welcome(self, request: web.Request):
-        return web.Response(text="App work correctly.\nSorce code: https://github.com/goorkamateusz/ToDoistIntegration")
+        return web.Response(text="App work correctly.\
+            \nSorce code: https://github.com/goorkamateusz/ToDoistIntegration")
 
     async def login(self, request: web.Request):
         state = "state"  # ???
-        url = f"https://todoist.com/oauth/authorize?client_id={client_id}&scope={scope}&state={state}"
+        url = f"https://todoist.com/oauth/authorize?\
+            client_id={client_id}&scope={scope}&state={state}"
         return web.HTTPFound(url)
 
     async def access_token(self, request: web.Request):
