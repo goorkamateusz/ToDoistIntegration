@@ -4,7 +4,7 @@ import discord
 from abc import abstractclassmethod
 from src.Database.Database import Database
 from src.Discord.Container import Container
-from src.ToDoist.ApiClient import ApiClient
+from src.ToDoist.ApiClient import ApiClientProvider
 from src.Database.Entities import TaskEntity
 
 
@@ -16,10 +16,10 @@ class DiscordComponent:
 
     def __init__(self,
                  client,
-                 todoist=Container.apiClient,
+                 todoist=Container.apiClientProvider,
                  db=Container.database):
         self.client: discord.Client = client
-        self.todoist: ApiClient = todoist
+        self.todoist: ApiClientProvider = todoist
         self.db: Database = db
         self.db_tasks = db._tasks  # todo obsolete
 

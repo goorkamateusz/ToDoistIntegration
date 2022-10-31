@@ -2,13 +2,15 @@ import discord
 from src.Discord.Reactions import managed_msg_reaction
 from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
+from src.ToDoist.ApiClient import ApiClient
 from src.config import thread_archive_time
 
 
 class AddingTask(OnMessageComponent):
 
     async def process(self, msg: discord.Message, content: str) -> None:
-        task = self.todoist.add_task(content)
+        todoist: ApiClient = self.todoist.get_client(msg.channel.id)
+        task = todoist.add_task(content)
 
         thread = await msg.channel.create_thread(
             name=content,

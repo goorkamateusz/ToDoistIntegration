@@ -1,7 +1,7 @@
-from src.ToDoist.ApiClient import ApiClient
+from src.ToDoist.ApiClient import ApiClientProvider
 from src.Database.Database import Database
 
 
 class Container:
-    apiClient: ApiClient = ApiClient()
+    apiClientProvider: ApiClientProvider = ApiClientProvider()
     database: Database = Database()
