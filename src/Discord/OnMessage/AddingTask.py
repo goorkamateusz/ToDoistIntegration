@@ -2,6 +2,7 @@ import discord
 from src.Discord.Reactions import managed_msg_reaction
 from src.Database.TaskEntity import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
+from src.config import thread_archive_time
 
 
 class AddingTask(OnMessageComponent):
@@ -11,7 +12,7 @@ class AddingTask(OnMessageComponent):
 
         thread = await msg.channel.create_thread(
             name=content,
-            auto_archive_duration=(60 * 24),
+            auto_archive_duration=thread_archive_time,
             message=msg)
 
         entity = TaskEntity(discord_channel_id=msg.channel.id,

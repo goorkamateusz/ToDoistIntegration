@@ -3,7 +3,7 @@ from typing import Any, Dict
 from src.Database.TaskEntity import TaskEntity
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.Discord.Reactions import managed_msg_reaction
-from src.config import temp_channel_id
+from src.config import temp_channel_id, thread_archive_time
 
 
 class OnAdded(OnNotificationComponent):
@@ -23,12 +23,12 @@ class OnAdded(OnNotificationComponent):
         msg = await channel.send(content)
         thread = await channel.create_thread(
             name=content,
-            auto_archive_duration=(60 * 24),
+            auto_archive_duration=thread_archive_time,
             message=msg)
 
         entity = TaskEntity(temp_channel_id, msg.id, thread.id, task_id)
 
-        self.db_tasks.insert_one(entity.to_dict())
+        self.db.insert(entity)
 
         communicate = "Dodano zadanie przez aplikację"
         await self.report(entity, communicate, managed_msg_reaction)
