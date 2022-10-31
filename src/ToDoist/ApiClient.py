@@ -1,3 +1,6 @@
+from typing import Dict
+import logging
+from requests import HTTPError
 from todoist_api_python.api import Project, Task, TodoistAPI
 from src.config import todoist_token
 
@@ -20,23 +23,29 @@ class ApiClient:
 
 class ApiClientProvider:
     def __init__(self) -> None:
-        self._api = ApiClientProvider.__get_todoist_api()
-        self._selected_project: Project = None
-        self.__select_project()
+        self._channels: Dict[str, ApiClient] = {}
 
     def get_client(self, channel_id: str) -> ApiClient:
-        # todo WIP
-        return ApiClient(self._api, self._selected_project.id)
+        if channel_id in self._channels:
+            return self._channels[channel_id]
+        else:
+            return self._try_to_connect_client(channel_id)
 
-    def __select_project(self) -> None:
-        proj = next(p for p in self._api.get_projects()
-                    if p.name == "Todoist_Integration_TEST")
-        self._selected_project = proj
-
-    @staticmethod
-    def __get_todoist_api() -> TodoistAPI:
+    def _try_to_connect_client(self, channel_id: str):
         try:
+            # todo todoist token & project
             api = TodoistAPI(todoist_token)
-            return api
-        except Exception as error:
-            raise Exception(error)
+
+            proj: Project = next(p for p in api.get_projects()
+                                 if p.name == "Todoist_Integration_TEST")
+
+            client = ApiClient(api, proj.id)
+
+            self._channels[channel_id] = client
+            return client
+
+        except HTTPError as error:
+            if error.response.status_code == 403:
+                return None
+            else:
+                logging.error(error)

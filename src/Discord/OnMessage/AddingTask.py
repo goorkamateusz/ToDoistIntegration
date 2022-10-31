@@ -10,6 +10,11 @@ class AddingTask(OnMessageComponent):
 
     async def process(self, msg: discord.Message, content: str) -> None:
         todoist: ApiClient = self.todoist.get_client(msg.channel.id)
+
+        if todoist is None:
+            await msg.reply("Kanał jest nie połączony")
+            return
+
         task = todoist.add_task(content)
 
         thread = await msg.channel.create_thread(
