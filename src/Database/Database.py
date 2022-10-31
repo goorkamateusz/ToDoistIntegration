@@ -1,7 +1,6 @@
 from typing import Any, Dict, Type
 from pymongo import MongoClient
-from src.Database.ProjectEntity import ProjectEntity
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import ProjectEntity, TaskEntity
 from src.config import connection_string
 
 

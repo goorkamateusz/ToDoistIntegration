@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Dict
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 from src.Discord.Reactions import done_reaction
 from src.Discord.DiscordClient import OnNotificationComponent
 

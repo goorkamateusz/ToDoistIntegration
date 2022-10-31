@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Dict
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.Discord.Reactions import managed_msg_reaction
 from src.config import temp_channel_id, thread_archive_time

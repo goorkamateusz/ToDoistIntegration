@@ -5,7 +5,7 @@ from abc import abstractclassmethod
 from src.Database.Database import Database
 from src.Discord.Container import Container
 from src.ToDoist.ApiClient import ApiClient
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 
 
 class DiscordClient:

@@ -1,6 +1,6 @@
 import discord
 from src.Discord.Reactions import done_reaction
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
 
 

@@ -1,6 +1,6 @@
 import logging
 import discord
-from src.Database.ProjectEntity import ProjectEntity
+from src.Database.Entities import ProjectEntity
 from src.Discord.DiscordClient import OnMessageComponent
 
 

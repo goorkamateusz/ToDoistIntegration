@@ -1,5 +1,5 @@
 import discord
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
 
 

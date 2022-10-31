@@ -1,6 +1,6 @@
 import discord
 from src.Discord.Reactions import managed_msg_reaction
-from src.Database.TaskEntity import TaskEntity
+from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
 from src.config import thread_archive_time
 
