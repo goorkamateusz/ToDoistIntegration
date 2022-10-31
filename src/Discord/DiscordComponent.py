@@ -5,6 +5,7 @@ from abc import abstractclassmethod
 from src.Database.Database import Database
 from src.Discord.Container import Container
 from src.ToDoist.ApiClient import ApiClient
+from src.Database.TaskEntity import TaskEntity
 
 
 class DiscordClient:
@@ -25,7 +26,10 @@ class DiscordComponent:
     def current_channel(self, msg: discord.Message):
         return self.client.get_channel(msg.channel.id)
 
-    async def report(self, entity, communicate=None, reaction=None) -> Task:
+    async def report(self,
+                     entity: TaskEntity,
+                     communicate: str = None,
+                     reaction: str = None) -> Task:
         if reaction:
             channel = self.client.get_channel(entity.discord_channel_id)
             msg = channel.get_partial_message(entity.discord_msg_id)

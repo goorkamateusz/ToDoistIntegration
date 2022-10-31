@@ -1,5 +1,6 @@
 from typing import Any, Dict, Type
 from pymongo import MongoClient
+from src.Database.ProjectEntity import ProjectEntity
 from src.Database.TaskEntity import TaskEntity
 from src.config import connection_string
 
@@ -10,8 +11,10 @@ class Database:
         client = MongoClient(connection_string)
         self.db: Database = client.get_database("todoist")
         self._tasks = self.db['tasks']
+        self._projects = self.db['projects']
         self._types = {
-            TaskEntity: self._tasks
+            TaskEntity: self._tasks,
+            ProjectEntity: self._projects
         }
 
     def find_one(self, type: Type, dict: Dict[Any, Any]):

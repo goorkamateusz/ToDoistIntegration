@@ -2,6 +2,8 @@ from src.Discord.OnMessage.ModifyTask import ModifyTask
 from src.Discord.OnMessage.DoneTask import DoneTask
 from src.Discord.OnMessage.AddingTask import AddingTask
 from src.Discord.OnMessage.ApplicationStatus import ApplicationStatus
+from src.Discord.OnMessage.RegisterTodoistToken import RegisterToDoistToken
+from src.Discord.OnMessage.SelectToDoistProject import SelectToDoistProject
 from src.Discord.OnNotification.OnComplete import OnComplete
 from src.Discord.OnNotification.OnAdded import OnAdded
 from src.Discord.DiscordClient import DiscordClient
@@ -10,6 +12,9 @@ from src.config import discord_token
 
 def main() -> None:
     client = DiscordClient()
+
+    client.on_messages["!token"] = RegisterToDoistToken(client)
+    client.on_messages["!project"] = SelectToDoistProject(client)
 
     client.on_messages["!test"] = ApplicationStatus(client)
     client.on_messages["!add"] = AddingTask(client)
