@@ -12,9 +12,13 @@ class NotSelectedProjectError(Exception):
 
 
 class ApiClient:
-    def __init__(self, api: TodoistAPI, project_id: str = None) -> None:
+    def __init__(self, api: TodoistAPI, project_id: str) -> None:
         self._api: TodoistAPI = api
         self.__project_id: str | None = project_id
+
+    @property
+    def is_project_selected(self) -> bool:
+        return self.__project_id is not None
 
     def add_task(self, content: str) -> Task:
         if self.__project_id is None:
@@ -59,12 +63,9 @@ class ApiClientProvider:
         if project:
             api = TodoistAPI(project.todoist_token)
 
+            proj_id = None
             if project.todoist_project_id:
                 proj_id = project.todoist_project_id
-            else:
-                proj: Project = next(p for p in api.get_projects()
-                                     if p.name == "Todoist_Integration_TEST")
-                proj_id = proj.id
 
             client = ApiClient(api, proj_id)
             return client
