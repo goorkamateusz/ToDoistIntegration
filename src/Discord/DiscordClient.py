@@ -3,6 +3,8 @@ from asyncio import Queue
 from discord.ext import tasks
 import discord
 import logging
+
+from requests import HTTPError
 from src.Discord.DiscordComponent import OnMessageComponent
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.WebhookServer.WebServer import web_server
@@ -27,8 +29,16 @@ class DiscordClient(discord.Client):
         prefix, _, content = message.content.partition(' ')
         logging.info(f"Processed message | {prefix} | {content}")
 
-        if prefix in self.on_messages:
-            await self.on_messages[prefix].process(message, content)
+        try:
+            if prefix in self.on_messages:
+                await self.on_messages[prefix].process(message, content)
+
+        except HTTPError as err:
+            await message.reply(err)
+
+        except Exception as err:
+            await message.reply("Błąd")
+            await message.reply(err)
 
     def __create_tasks(self):
         taskQueue = Queue()
