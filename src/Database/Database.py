@@ -26,3 +26,10 @@ class Database:
             t = type(entity)
         db = self._types[t]
         db.insert_one(entity.to_dict())
+
+    def update_one(self,
+                   t: Type,
+                   filter: Dict[Any, Any],
+                   value: Dict[Any, Any]):
+        db = self._types[t]
+        db.update_one(filter, value)

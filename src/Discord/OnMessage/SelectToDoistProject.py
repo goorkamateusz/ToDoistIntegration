@@ -9,15 +9,30 @@ class SelectToDoistProject(OnMessageComponent):
     """
     async def process(self, msg: discord.Message, content: str) -> None:
         channel = msg.channel
-        project = self.db.find_one(
-            ProjectEntity, {"discord_channel_id": channel.id})
+        filter = {"discord_channel_id": channel.id}
+        project: ProjectEntity = self.db.find_one(ProjectEntity, filter)
 
-        if project:
-            await msg.reply("WIP")
-
-        else:
+        if not project:
             await msg.reply(
-                "Najpierw połącz aplikację ToDoist poprzez komendę:\
-                `!todoist <api token>`",
-                mention_author=False
-            )
+                "Najpierw połącz aplikację ToDoist poprzez komendę:\n\
+`!todoist <api token>`")
+            return
+
+        client = self.todoist.get_client(channel.id)
+        projects = client._api.get_projects()
+
+        selected_proj = next((p for p in projects if p.name == content), None)
+
+        if not selected_proj:
+            await msg.reply(
+                "Nie znaleziono wybranego projektu. Spróbuj jeszcze raz.")
+            return
+
+        self.db.update_one(
+            ProjectEntity,
+            filter,
+            {"$set": {"todoist_project_id": selected_proj.id}})
+
+        client.select_project(selected_proj.id)
+
+        await msg.reply("Połączono projekt")

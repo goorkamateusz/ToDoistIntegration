@@ -32,6 +32,9 @@ class ApiClient:
     def update_task(self, task_id: str, new_content: str) -> bool:
         return self._api.update_task(task_id, content=new_content)
 
+    def select_project(self, project_id: str) -> None:
+        self.__project_id = project_id
+
 
 class ApiClientProvider:
     def __init__(self) -> None:
