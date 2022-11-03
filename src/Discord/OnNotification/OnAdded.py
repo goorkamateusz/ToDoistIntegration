@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Dict
+from typing import Any, Dict, List
 from src.Database.Entities import TaskEntity, ProjectEntity
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.Discord.Reactions import managed_msg_reaction
@@ -17,7 +17,7 @@ class OnAdded(OnNotificationComponent):
             return
 
         project_id = event_data["project_id"]
-        entities: ProjectEntity = self.db.find(
+        entities: List[ProjectEntity] = self.db.find(
             ProjectEntity, {"todoist_project_id": project_id})
 
         for entity in entities:
