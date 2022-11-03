@@ -4,7 +4,6 @@ from requests import HTTPError
 from todoist_api_python.api import Project, Task, TodoistAPI
 from src.Database.Entities import ProjectEntity
 from src.Database.Database import Database
-from src.config import todoist_token
 
 
 class NotSelectedProjectError(Exception):
