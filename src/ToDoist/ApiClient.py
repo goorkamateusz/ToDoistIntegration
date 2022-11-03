@@ -2,15 +2,23 @@ from typing import Dict
 import logging
 from requests import HTTPError
 from todoist_api_python.api import Project, Task, TodoistAPI
+from src.Database.Entities import ProjectEntity
+from src.Database.Database import Database
 from src.config import todoist_token
 
 
+class NotSelectedProjectError(Exception):
+    pass
+
+
 class ApiClient:
-    def __init__(self, api: TodoistAPI, project_id: str) -> None:
+    def __init__(self, api: TodoistAPI, project_id: str = None) -> None:
         self._api: TodoistAPI = api
-        self.__project_id: str = project_id
+        self.__project_id: str | None = project_id
 
     def add_task(self, content: str) -> Task:
+        if self.__project_id is None:
+            raise NotSelectedProjectError()
         return self._api.add_task(
             content=content, project_id=self.__project_id)
 
@@ -24,6 +32,7 @@ class ApiClient:
 class ApiClientProvider:
     def __init__(self) -> None:
         self._channels: Dict[str, ApiClient] = {}
+        self.db: Database
 
     def get_client(self, channel_id: str) -> ApiClient:
         if channel_id in self._channels:
@@ -33,19 +42,38 @@ class ApiClientProvider:
 
     def _try_to_connect_client(self, channel_id: str):
         try:
-            # todo todoist token & project
-            api = TodoistAPI(todoist_token)
-
-            proj: Project = next(p for p in api.get_projects()
-                                 if p.name == "Todoist_Integration_TEST")
-
-            client = ApiClient(api, proj.id)
-
-            self._channels[channel_id] = client
-            return client
+            client = self._create_client(channel_id)
+            if client:
+                self._channels[channel_id] = client
+                return client
 
         except HTTPError as error:
-            if error.response.status_code == 403:
-                return None
+            logging.error(error)
+
+        return None
+
+    def _create_client(self, channel_id: str):
+        project: ProjectEntity = self.db.find_one(
+            ProjectEntity, {"discord_channel_id": channel_id})
+
+        if project:
+            api = TodoistAPI(project.todoist_token)
+
+            if project.todoist_project_id:
+                proj_id = project.todoist_project_id
             else:
-                logging.error(error)
+                proj: Project = next(p for p in api.get_projects()
+                                     if p.name == "Todoist_Integration_TEST")
+                proj_id = proj.id
+
+            client = ApiClient(api, proj_id)
+            return client
+
+        return None
+
+    def validate_token(self, token: str) -> bool:
+        try:
+            TodoistAPI(token)
+            return True
+        except HTTPError:
+            return False
