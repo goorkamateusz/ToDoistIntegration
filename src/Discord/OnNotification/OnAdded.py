@@ -1,9 +1,9 @@
 import logging
 from typing import Any, Dict
-from src.Database.Entities import TaskEntity
+from src.Database.Entities import TaskEntity, ProjectEntity
 from src.Discord.DiscordComponent import OnNotificationComponent
 from src.Discord.Reactions import managed_msg_reaction
-from src.config import temp_channel_id, thread_archive_time
+from src.config import thread_archive_time
 
 
 class OnAdded(OnNotificationComponent):
@@ -16,19 +16,24 @@ class OnAdded(OnNotificationComponent):
             logging.info(f"Task have been added yet | {task_id}")
             return
 
-        channel_id = int(temp_channel_id)
-        channel = self.client.get_channel(channel_id)
-        content = event_data["content"]
+        project_id = event_data["project_id"]
+        entities: ProjectEntity = self.db.find(
+            ProjectEntity, {"todoist_project_id": project_id})
 
-        msg = await channel.send(content)
-        thread = await channel.create_thread(
-            name=content,
-            auto_archive_duration=thread_archive_time,
-            message=msg)
+        for entity in entities:
+            channel = self.client.get_channel(entity.discord_channel_id)
+            content = event_data["content"]
 
-        entity = TaskEntity(temp_channel_id, msg.id, thread.id, task_id)
+            msg = await channel.send(content)
 
-        self.db.insert(entity)
+            thread = await channel.create_thread(
+                name=content,
+                auto_archive_duration=thread_archive_time,
+                message=msg)
 
-        communicate = "Dodano zadanie przez aplikację"
-        await self.report(entity, communicate, managed_msg_reaction)
+            entity = TaskEntity(msg.channel.id, msg.id, thread.id, task_id)
+
+            self.db.insert(entity)
+
+            communicate = "Dodano zadanie przez aplikację"
+            await self.report(entity, communicate, managed_msg_reaction)

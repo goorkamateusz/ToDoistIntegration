@@ -22,6 +22,11 @@ class Database:
         selected = db.find_one(dict)
         return type.from_dict(selected) if selected else None
 
+    def find(self, type: Type, dict: Dict[Any, Any]):
+        cursor = self._types[type].find(dict)
+        for c in cursor:
+            yield type.from_dict(c)
+
     def insert(self, entity: Any):
         t = type(entity)
         self._types[t].insert_one(entity.to_dict())

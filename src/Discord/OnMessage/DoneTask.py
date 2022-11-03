@@ -11,7 +11,7 @@ class DoneTask(OnMessageComponent):
         entity: TaskEntity = self.db.find_one(
             TaskEntity, {"discord_thread_id": msg.channel.id})
 
-        todoist: ApiClient = self.todoist.get_client(msg.channel.id)
+        todoist: ApiClient = self.todoist.get_client(entity.discord_channel_id)
 
         if todoist.close_task(entity.todoist_task_id):
             await self.report(entity, "Zamknięto zadanie", done_reaction)
