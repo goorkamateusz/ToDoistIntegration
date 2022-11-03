@@ -4,6 +4,7 @@ from src.Discord.OnMessage.AddingTask import AddingTask
 from src.Discord.OnMessage.ApplicationStatus import ApplicationStatus
 from src.Discord.OnMessage.RegisterTodoistToken import RegisterToDoistToken
 from src.Discord.OnMessage.SelectToDoistProject import SelectToDoistProject
+from src.Discord.OnMessage.RemoveToDoistConnection import RemoveToDoistConnection
 from src.Discord.OnNotification.OnComplete import OnComplete
 from src.Discord.OnNotification.OnAdded import OnAdded
 from src.Discord.DiscordClient import DiscordClient
@@ -15,6 +16,7 @@ def main() -> None:
 
     client.on_messages["!token"] = RegisterToDoistToken(client)
     client.on_messages["!project"] = SelectToDoistProject(client)
+    client.on_messages["!rmtoken"] = RemoveToDoistConnection(client)
 
     client.on_messages["!test"] = ApplicationStatus(client)
     client.on_messages["!add"] = AddingTask(client)

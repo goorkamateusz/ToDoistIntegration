@@ -73,10 +73,3 @@ class ApiClientProvider:
             return client
 
         return None
-
-    def validate_token(self, token: str) -> bool:
-        try:
-            TodoistAPI(token)
-            return True
-        except HTTPError:
-            return False

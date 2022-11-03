@@ -1,5 +1,6 @@
 from typing import Any, Dict, Type
 from pymongo import MongoClient
+from pymongo.results import DeleteResult
 from src.Database.Entities import ProjectEntity, TaskEntity
 from src.config import connection_string
 
@@ -21,15 +22,21 @@ class Database:
         selected = db.find_one(dict)
         return type.from_dict(selected) if selected else None
 
-    def insert(self, entity: Any, t: Type = None):
-        if t is None:
-            t = type(entity)
-        db = self._types[t]
-        db.insert_one(entity.to_dict())
+    def insert(self, entity: Any):
+        t = type(entity)
+        self._types[t].insert_one(entity.to_dict())
 
     def update_one(self,
                    t: Type,
                    filter: Dict[Any, Any],
                    value: Dict[Any, Any]):
-        db = self._types[t]
-        db.update_one(filter, value)
+        self._types[t].update_one(filter, value)
+
+    def delete_one(self, t: Type, filter: Dict[Any, Any]) -> DeleteResult:
+        return self._types[t].delete_one(filter)
+
+    def insert_or_update(self, filter: Dict[Any, Any], entity: Any):
+        t = type(entity)
+        self._types[t].update_one(filter,
+                                  {"$set": entity.to_dict()},
+                                  upsert=True)

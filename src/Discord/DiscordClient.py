@@ -35,10 +35,12 @@ class DiscordClient(discord.Client):
 
         except HTTPError as err:
             await message.reply(err)
+            raise err
 
         except Exception as err:
             await message.reply("Błąd")
             await message.reply(err)
+            raise err
 
     def __create_tasks(self):
         taskQueue = Queue()
