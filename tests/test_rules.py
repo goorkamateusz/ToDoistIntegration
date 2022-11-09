@@ -1,4 +1,4 @@
-from src.LanguageProcessor.Processor import *
+from src.LanguageProcessor.Processor import LanguageProcessor
 
 
 def test_adding_task():
@@ -44,3 +44,18 @@ dodaj zadanie posprzątaj z etykietą dom""")
     assert result.command == "add"
     assert result.dict["treść"] == "posprzątaj"
     assert result.dict["etykieta"] == "dom"
+
+
+def test_multiple_rule_add():
+    processor = LanguageProcessor()
+    processor.add_rule("add", "dodaj zadanie [treść]")
+    processor.add_rule("add", "dodaj zadanie [treść] z etykietą [etykieta]")
+
+    results = processor.process("Dodaj zadanie kup mleko z etykietą zakupy")
+    assert len(results) == 1
+
+    result = results[0]
+    assert result.command == "add"
+    assert len(result) == 2
+    assert result.dict["treść"] == "kup mleko"
+    assert result.dict["etykieta"] == "zakupy"
