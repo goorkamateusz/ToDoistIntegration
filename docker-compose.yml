@@ -21,4 +21,9 @@ services:
     volumes:
       - /var/log:/var/log
     environment:
-      - CONNECTION_STRING=mongodb://${db_root_user}:${db_root_pass}@mongodb-primary/
+      - connection_string=mongodb://${db_root_user}:${db_root_pass}@mongodb-primary/
+      - todoist_client_id=${todoist_client_id}
+      - todoist_client_secret=${todoist_client_secret}
+      - todoist_scope=${todoist_scope}
+      - discord_token=${discord_token}
+      - logging_file=${logging_file}
