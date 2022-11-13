@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  mongodb-primary:
+    image: mongo
+    ports:
+      - 40250:27017
+    container_name: mongodb-primary
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${db_root_user}"
+      MONGO_INITDB_ROOT_PASSWORD: "${db_root_pass}"
+
   discordtodoist:
     image: discordtodoist
     build:
@@ -11,3 +20,5 @@ services:
     container_name: todoist-integration
     volumes:
       - /var/log:/var/log
+    environment:
+      - CONNECTION_STRING=mongodb://${db_root_user}:${db_root_pass}@mongodb-primary/

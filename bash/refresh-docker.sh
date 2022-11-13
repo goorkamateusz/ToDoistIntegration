@@ -10,4 +10,5 @@ then
     sudo apt install docker-compose-plugin
 fi
 
+docker compose build
 docker compose up -d

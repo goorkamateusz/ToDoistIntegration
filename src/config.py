@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def config(id: str) -> str:
@@ -11,6 +12,6 @@ client_id = config("client_id")
 client_secret = config("client_secret")
 scope = config("scope")
 discord_token = config("discord_token")
-connection_string = config("connection_string")
+connection_string = os.getenv("CONNECTION_STRING")
 logging_file = config("logging_file")
 thread_archive_time = (60 * 1)
