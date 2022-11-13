@@ -1,13 +1,13 @@
-docker build -t todoist-integration:latest .;
 
-containerId=`docker ps -qaf name=todoist-integration`;
+if ! command -v docker
+then
+    echo "Docker not installed"
+    return 1
+fi
 
-[ -z $containerId ] || docker stop $containerId;
-[ -z $containerId ] || docker rm $containerId;
+if ! command -v docker compose
+then
+    sudo apt install docker-compose-plugin
+fi
 
-docker run -d \
-    -p 5100:5100 \
-    --name todoist-integration \
-    --restart always \
-    -v /var/log:/var/log \
-    todoist-integration;
+docker compose up -d

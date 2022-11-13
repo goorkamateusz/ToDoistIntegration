@@ -8,3 +8,6 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 5100:5100
+    container_name: todoist-integration
+    volumes:
+      - /var/log:/var/log
