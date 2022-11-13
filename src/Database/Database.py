@@ -8,6 +8,8 @@ from src.config import connection_string
 class Database:
 
     def __init__(self):
+        print("[database]")
+        print(connection_string)
         client = MongoClient(connection_string)
         self.db: Database = client.get_database("todoist")
         self._tasks = self.db['tasks']
