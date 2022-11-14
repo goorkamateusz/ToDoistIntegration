@@ -12,12 +12,13 @@ def config_logging():
     stream.setFormatter(formatter)
     logging.getLogger().addHandler(stream)
 
-    file = RotatingFileHandler(
-        filename=logging_file, maxBytes=500 * 1024, encoding='utf-8')
-    file.setFormatter(formatter)
-    logging.getLogger().addHandler(file)
+    if logging_file:
+        file = RotatingFileHandler(
+            filename=logging_file, maxBytes=500 * 1024, encoding='utf-8')
+        file.setFormatter(formatter)
+        logging.getLogger().addHandler(file)
 
-    logging.getLogger().setLevel(logging.INFO)
+        logging.getLogger().setLevel(logging.INFO)
 
 
 if __name__ == "__main__":

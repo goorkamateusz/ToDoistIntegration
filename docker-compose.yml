@@ -1,11 +1,12 @@
 version: '3.4'
 
 services:
-  mongodb-primary:
+  database0:
     image: mongo
+    command: mongod --port 40250
     ports:
-      - 40250:27017
-    container_name: mongodb-primary
+      - 40250:40250
+    container_name: database0
     environment:
       MONGO_INITDB_ROOT_USERNAME: "${db_root_user}"
       MONGO_INITDB_ROOT_PASSWORD: "${db_root_pass}"
@@ -21,7 +22,7 @@ services:
     volumes:
       - /var/log:/var/log
     environment:
-      - connection_string=mongodb://${db_root_user}:${db_root_pass}@${db_domain}:40250/
+      - connection_string=mongodb://${db_root_user}:${db_root_pass}@database0:40250/
       - todoist_client_id=${todoist_client_id}
       - todoist_client_secret=${todoist_client_secret}
       - todoist_scope=${todoist_scope}
