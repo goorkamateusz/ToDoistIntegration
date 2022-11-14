@@ -2,13 +2,13 @@
 if ! command -v docker
 then
     echo "Docker not installed"
-    return 1
+    exit 1
 fi
 
 if ! command -v docker compose
 then
-    sudo apt install docker-compose-plugin
+    echo "Docker compose not installed"
+    exit 1
 fi
 
-docker compose build
-docker compose up -d
+docker compose up --build -d

@@ -1,16 +1,6 @@
 version: '3.4'
 
 services:
-  database0:
-    image: mongo
-    command: mongod --port 40250
-    ports:
-      - 40250:40250
-    container_name: database0
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: "${db_root_user}"
-      MONGO_INITDB_ROOT_PASSWORD: "${db_root_pass}"
-
   discordtodoist:
     image: discordtodoist
     build:
@@ -28,3 +18,13 @@ services:
       - todoist_scope=${todoist_scope}
       - discord_token=${discord_token}
       - logging_file=${logging_file}
+
+  database0:
+    image: mongo
+    command: mongod --port 40250
+    ports:
+      - 40250:40250
+    container_name: database0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${db_root_user}"
+      MONGO_INITDB_ROOT_PASSWORD: "${db_root_pass}"
