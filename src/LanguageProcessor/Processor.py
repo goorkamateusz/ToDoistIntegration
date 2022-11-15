@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List
 import re
+import json
 
 
 @dataclass
@@ -38,12 +39,27 @@ class LanguageProcessor:
     def __init__(self) -> None:
         self.rules: List[Rule] = []
 
+    def __init__(self, file_name: str = None) -> None:
+        self.rules: List[Rule] = []
+        if file_name:
+            file = open(file_name)
+            dict = json.load(file)
+            self.import_rules(dict)
+
     def add_rule(self, command: str, rule: str):
         self.rules.append(Rule(command, rule))
+
+    def import_rules(self, json: Dict[str, List[str]]):
+        for command, rules in json.items():
+            for rule in rules:
+                self.add_rule(command, rule)
 
     def process(self, text: str) -> List[Result]:
         results: Dict[str, List[Result]] = {}
         out = []
+
+        if text is None:
+            return list()
 
         for rule in self.rules:
             for r in rule.process(text):

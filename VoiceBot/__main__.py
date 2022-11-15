@@ -4,8 +4,12 @@ from src.LanguageProcessor.Processor import LanguageProcessor
 
 if __name__ == "__main__":
     input = VoiceInput()
-    processor = LanguageProcessor()
+    processor = LanguageProcessor("data/rules/pl-PL.json")
 
     text: str = input.get_text()
     print(text)
-    processor.process(text)
+
+    commands = processor.process(text)
+
+    for c in commands:
+        print(c)
