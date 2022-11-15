@@ -1,27 +1,15 @@
 {
     "add": [
-        "dodaj zadanie [content]",
-        "stwórz zadanie [content]",
-        "utwórz zadanie [content]",
-        "zapisz zadanie [content]",
-        "wprowadź zadanie [content]",
-
-        "dodaj zadanie [content] o etykiecie [label]",
-        "stwórz zadanie [content] o etykiecie [label]",
-        "utwórz zadanie [content] o etykiecie [label]",
-        "zapisz zadanie [content] o etykiecie [label]",
-        "wprowadź zadanie [content] o etykiecie [label]",
-
-        "dodaj zadanie [content] z etykietą [label]",
-        "stwórz zadanie [content] z etykietą [label]",
-        "utwórz zadanie [content] z etykietą [label]",
-        "zapisz zadanie [content] z etykietą [label]",
-        "wprowadź zadanie [content] z etykietą [label]",
-
-        "dodaj zadanie z etykietą [label] o treści [content]",
-        "stwórz zadanie z etykietą [label] o treści [content]",
-        "utwórz zadanie z etykietą [label] o treści [content]",
-        "zapisz zadanie z etykietą [label] o treści [content]",
-        "wprowadź zadanie z etykietą [label] o treści [content]"
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie [content]",
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie [content] o etykiecie [label]",
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie [content] z etykietą [label]",
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie o etykiecie [label] o treści [content]",
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie z etykietą [label] o treści [content]",
+        "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie [label] o treści [content]"
+    ],
+    "done": [
+        "(zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij) (zadanie)? [content]",
+        "odznacz za skończone (zadanie)? [content]",
+        "zadanie [content] (zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij)"
     ]
 }

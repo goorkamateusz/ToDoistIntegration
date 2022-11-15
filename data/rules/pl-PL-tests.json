@@ -1,0 +1,59 @@
+[
+    {
+        "c": "add",
+        "d": {
+            "content": "idź na zajęcia"
+        },
+        "t": [
+            "Dodaj zadanie idź na zajęcia",
+            "STWÓRZ zadanie idź na zajęcia",
+            "ZaPisz zadanie idź na zajęcia",
+            "wprowadź zadanie idź na zajęcia",
+            "utwórz zadanie idź na zajęcia"
+        ]
+    },
+    {
+        "c": "add",
+        "d": {
+            "content": "idź na zajęcia",
+            "label": "studia"
+        },
+        "t": [
+            "Dodaj zadanie idź na zajęcia z etykietą studia",
+            "STWÓRZ zadanie idź na zajęcia z etykietą studia",
+            "ZaPisz zadanie idź na zajęcia z etykietą studia",
+            "wprowadź zadanie idź na zajęcia z etykietą studia",
+            "utwórz zadanie idź na zajęcia z etykietą studia",
+            "zapisz zadanie idź na zajęcia o etykiecie studia",
+            "zapisz zadanie z etykietą studia o treści idź na zajęcia",
+            "dodaj zadanie studia o treści idź na zajęcia"
+        ]
+    },
+    {
+        "c": "add",
+        "d": {
+            "content": "zadanie domowe",
+            "label": "studia"
+        },
+        "t": [
+            "Dodaj zadanie zadanie domowe z etykietą studia"
+        ]
+    },
+    {
+        "c": "done",
+        "d": {
+            "content": "zadanie domowe"
+        },
+        "t": [
+            "zakończ zadanie zadanie domowe",
+            "odznacz zadanie zadanie domowe",
+            "skończono zadanie zadanie domowe",
+            "usuń zadanie zadanie domowe",
+            "zamknij zadanie zadanie domowe",
+            "odznacz za skończone zadanie zadanie domowe",
+            "zadanie zadanie domowe zakończone",
+            "zadanie zadanie domowe skończone",
+            "zadanie zadanie domowe gotowe"
+        ]
+    }
+]

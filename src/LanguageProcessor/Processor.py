@@ -42,7 +42,7 @@ class LanguageProcessor:
     def __init__(self, file_name: str = None) -> None:
         self.rules: List[Rule] = []
         if file_name:
-            file = open(file_name)
+            file = open(file_name, encoding="utf-8")
             dict = json.load(file)
             self.import_rules(dict)
 
