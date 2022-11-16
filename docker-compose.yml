@@ -1,14 +1,14 @@
 version: '3.4'
 
 services:
-  discordtodoist:
-    image: discordtodoist
+  app:
+    image: todoistintegration
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
       - 5100:5100
-    container_name: todoist-integration
+    container_name: todoistintegration
     volumes:
       - /var/log:/var/log
     environment:
