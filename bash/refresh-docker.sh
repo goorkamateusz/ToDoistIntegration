@@ -12,3 +12,7 @@ then
 fi
 
 docker compose up --build -d
+
+sleep 2
+
+docker exec database0 scripts/rs-setup.sh
