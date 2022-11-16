@@ -1,3 +1,4 @@
+from src.Database.Database import Database
 from src.Discord.DiscordBot import main
 from src.config import logging_file
 import logging
@@ -18,7 +19,7 @@ def config_logging():
         file.setFormatter(formatter)
         logging.getLogger().addHandler(file)
 
-        logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.INFO)
 
 
 if __name__ == "__main__":
@@ -27,6 +28,7 @@ if __name__ == "__main__":
     logging.info("App started")
     logging.info("-" * 60)
 
+    Database()
     main()
 
     logging.info("App stopped")
