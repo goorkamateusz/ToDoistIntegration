@@ -1,8 +1,8 @@
 import discord
-from src.Discord.DiscordComponent import DiscordClient
 from src.Discord.Container import Container
-from src.Discord.DiscordClient import OnMessageComponent
-from src.LanguageProcessor.Processor import LanguageProcessor
+from src.Discord.DiscordComponent import OnMessageComponent
+from src.Discord.DiscordClient import DiscordClient
+from src.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
 class LanguageProcessMessage(OnMessageComponent):
@@ -29,9 +29,12 @@ class LanguageProcessMessage(OnMessageComponent):
 
         if len(commands) > 0:
             first_command = commands[0]
-            discord: DiscordClient = self.client
+            await self.process_command(msg, first_command)
 
-            new_var = f"!{first_command.command}"
-            if new_var in discord.on_messages:
-                await discord.on_messages[new_var].process(
-                    msg, first_command.dict["content"])
+    async def process_command(self, msg, command: Result):
+        discord: DiscordClient = self.client
+        command_id = f"!{command.command}"
+
+        if command_id in discord.on_messages:
+            component: OnMessageComponent = discord.on_messages[command_id]
+            await component.process_command(msg, command)

@@ -1,4 +1,5 @@
 import discord
+from src.LanguageProcessor.Processor import Result
 from src.Discord.Reactions import managed_msg_reaction
 from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
@@ -7,6 +8,9 @@ from src.config import thread_archive_time
 
 
 class AddingTask(OnMessageComponent):
+
+    async def process_command(self, msg: discord.Message, command: Result):
+        await self.process(msg, command.dict["content"])
 
     async def process(self, msg: discord.Message, content: str) -> None:
         todoist: ApiClient = self.todoist.get_client(msg.channel.id)

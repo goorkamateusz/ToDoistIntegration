@@ -1,11 +1,13 @@
+from abc import abstractclassmethod
 from asyncio import Task
 from typing import Any, Dict
 import discord
-from abc import abstractclassmethod
+
+from src.LanguageProcessor.Processor import Result
 from src.Database.Database import Database
+from src.Database.Entities import TaskEntity
 from src.Discord.Container import Container
 from src.ToDoist.ApiClient import ApiClientProvider
-from src.Database.Entities import TaskEntity
 
 
 class DiscordClient:
@@ -43,6 +45,10 @@ class DiscordComponent:
 class OnMessageComponent(DiscordComponent):
     @abstractclassmethod
     async def process(self, msg: discord.Message, content: str) -> None:
+        raise NotImplementedError()
+
+    @abstractclassmethod
+    async def process_command(self, msg: discord.Message, command: Result):
         raise NotImplementedError()
 
 
