@@ -22,7 +22,9 @@ def main() -> None:
 
     client.on_messages["!test"] = ApplicationStatus(client)
     client.on_messages["!add"] = AddingTask(client)
+    client.on_messages["!dodaj"] = AddingTask(client)
     client.on_messages["!done"] = DoneTask(client)
+    client.on_messages["!gotowe"] = DoneTask(client)
     client.on_messages["!update"] = ModifyTask(client)
 
     client.on_messages["!!"] = LanguageProcessMessage(client)
