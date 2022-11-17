@@ -1,27 +1,20 @@
-import logging
 from typing import Any, Dict, Type
-import pymongo
-from pymongo import MongoClient
 from pymongo.results import DeleteResult
 from src.Database.Entities import ProjectEntity, TaskEntity
-from src.config import connection_string
+from src.Database.MongoDbClientProvider import MongoDbClientProvider
+
+
+class DbNotConnectedError(Exception):
+    pass
 
 
 class Database:
 
     def __init__(self):
-        print("[database]")
-        print(connection_string)
+        client = MongoDbClientProvider().get_client()
 
-        try:
-            client = MongoClient(connection_string,
-                                 serverSelectionTimeoutMS=5000)
-            client.server_info()
-        except pymongo.errors.ServerSelectionTimeoutError as err:
-            logging.exception(err)
-            exit(1)
-
-        logging.info("connected with database")
+        if client is None:
+            raise DbNotConnectedError()
 
         self.db: Database = client.get_database("todoist")
         self._tasks = self.db['tasks']
