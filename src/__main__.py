@@ -1,8 +1,8 @@
-from src.Database.MongoDbClientProvider import MongoDbClientProvider
-from src.config import logging_file
+import sys
 import logging
 from logging.handlers import RotatingFileHandler
-import sys
+from src.config import logging_file
+from src.Database.MongoDbClientProvider import MongoDbClientProvider
 
 
 def config_logging():
@@ -25,11 +25,14 @@ if __name__ == "__main__":
     config_logging()
     MongoDbClientProvider().try_to_start_connection()
 
+    # hotfix
+    from src.Discord.Container import Container
+    from src.Discord.DiscordBot import main
+    Container.apiClientProvider.db = Container.database
+
     logging.info("App started")
     logging.info("-" * 60)
 
-    # fixme huge ugly hotfix xd
-    from src.Discord.DiscordBot import main
     main()
 
     logging.info("App stopped")
