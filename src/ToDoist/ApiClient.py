@@ -34,6 +34,9 @@ class ApiClient:
     def select_project(self, project_id: str) -> None:
         self.__project_id = project_id
 
+    def add_comment(self, task_id: str, content: str) -> bool:
+        return self._api.add_comment(task_id=task_id, content=content)
+
 
 class ApiClientProvider:
     def __init__(self) -> None:
