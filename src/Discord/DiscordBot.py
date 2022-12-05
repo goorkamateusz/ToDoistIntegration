@@ -1,3 +1,4 @@
+from src.Discord.OnMessage.Help import Help
 from src.Discord.OnMessage.ModifyTask import ModifyTask
 from src.Discord.OnMessage.DoneTask import DoneTask
 from src.Discord.OnMessage.AddingTask import AddingTask
@@ -27,6 +28,7 @@ def main() -> None:
     client.on_messages["!done"] = DoneTask(client)
     client.on_messages["!gotowe"] = DoneTask(client)
     client.on_messages["!update"] = ModifyTask(client)
+    client.on_messages["!help"] = Help(client)
 
     client.on_messages["!add_comment"] = AddComment(client)
 
