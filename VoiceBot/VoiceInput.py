@@ -14,4 +14,5 @@ class VoiceInput:
                 text = self.r.recognize_google(audio, language=self.language)
                 return text
             except Exception as e:
+                print(e)
                 return None
