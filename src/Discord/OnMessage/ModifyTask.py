@@ -6,6 +6,8 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class ModifyTask(OnMessageComponent):
+    """ Modify task content
+    """
 
     async def process(self, msg: discord.Message, content: str) -> None:
         entity: TaskEntity = self.db.find_one(

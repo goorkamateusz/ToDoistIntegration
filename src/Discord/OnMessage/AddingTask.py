@@ -8,6 +8,8 @@ from src.config import thread_archive_time
 
 
 class AddingTask(OnMessageComponent):
+    """ Create new task
+    """
 
     async def process_command(self, msg: discord.Message, command: Result):
         await self.process(msg, command.dict["content"])

@@ -10,6 +10,7 @@ from src.Discord.DiscordClient import OnMessageComponent
 class Help(OnMessageComponent):
     """ Send message with help manual
     """
+    
     async def process(self, msg: discord.Message, content: str) -> None:
         client: DiscordClient = self.client
 
@@ -20,4 +21,4 @@ class Help(OnMessageComponent):
         await msg.reply(message)
 
     async def process_command(self, msg: discord.Message, command: Result):
-        await self.process(msg, command.dict["content"])
+        await self.process(msg, None)

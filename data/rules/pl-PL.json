@@ -18,5 +18,10 @@
     "add_comment": [
         "(dodaj|stwórz) komentarz [content]",
         "skomentuj zadanie [content]"
+    ],
+    "help": [
+        "pomóż mi",
+        "help",
+        "(potrzebuję|potrzebuje) pomocy"
     ]
 }

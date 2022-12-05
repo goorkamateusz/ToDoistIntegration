@@ -7,6 +7,8 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class AddComment(OnMessageComponent):
+    """ Add comment to task
+    """
 
     async def process(self, msg: discord.Message, content: str) -> None:
         entity: TaskEntity = self.db.find_one(

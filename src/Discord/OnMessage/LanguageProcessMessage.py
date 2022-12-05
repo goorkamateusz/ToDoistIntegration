@@ -6,7 +6,9 @@ from src.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
 class LanguageProcessMessage(OnMessageComponent):
-
+    """ Process natural language command
+    """
+    
     def __init__(self,
                  client,
                  todoist=Container.apiClientProvider,

@@ -7,7 +7,9 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class DoneTask(OnMessageComponent):
-
+    """ Set task as done
+    """
+    
     async def process(self, msg: discord.Message, content: str | None) -> None:
         entity: TaskEntity = self.db.find_one(
             TaskEntity, {"discord_thread_id": msg.channel.id})
