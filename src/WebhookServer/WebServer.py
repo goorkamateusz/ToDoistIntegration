@@ -16,6 +16,7 @@ async def web_server(queue: Queue):
         web.get("/login", controller.login),
         web.get("/access_token", controller.access_token),
         web.post("/payload", controller.payload),
+        web.post("/test", controller.test),
     ])
 
     runner = web.AppRunner(app)
