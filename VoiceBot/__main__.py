@@ -1,9 +1,10 @@
 import threading
 import time
-from typing import Any, Dict
+from typing import Any, Dict, List
+from VoiceBot.VoiceCommandsProcessor import VoiceCommandsProcessor
 from VoiceBot.VoiceInput import VoiceInput
 from VoiceBot.VoiceOutput import VoiceOutput
-from src.LanguageProcessor.Processor import LanguageProcessor
+from src.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
 class myThread (threading.Thread):
@@ -24,26 +25,42 @@ class myThread (threading.Thread):
             time.sleep(0.5)
 
 
+def process_alterantives(processor: LanguageProcessor, result) -> List[Result]:
+    commands: List[Result] = list()
+    for alternative in result["alternative"]:
+        transcript = alternative["transcript"]
+        print(transcript)
+        command: List[Result] = processor.process(transcript)
+        if command is not None:
+            commands.extend(command)
+    return commands
+
+
+def validate_input(result):
+    return isinstance(result, dict)
+
+
 if __name__ == "__main__":
     input = VoiceInput()
     processor = LanguageProcessor("data/rules/pl-PL.json")
+    commands_processor = VoiceCommandsProcessor()
     speech = myThread()
     speech.start()
 
     try:
         while True:
             speech.print = True
-            output: Dict[str, Any] = input.get_text(speech)
+            result: Dict[str, Any] = input.get_text(speech)
 
-            if output is not None:
-                print(output)
+            if validate_input(result):
+                print()
                 speech.print = False
+                commands = process_alterantives(processor, result)
+                commands_processor.process(commands)
 
-                for alt in output["alternative"]:
-                    commands = processor.process(alt["transcript"])
-
-                for c in commands:
-                    print(c)
+                if commands is not None:
+                    for c in commands:
+                        print(c)
 
     except KeyboardInterrupt:
         print('You pressed ctrl+c')

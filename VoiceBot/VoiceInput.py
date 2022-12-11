@@ -12,8 +12,9 @@ class VoiceInput:
                 thread.msg = "Słucham"
                 audio = self.r.listen(source)
                 thread.msg = "Przetwarzam"
-                text = self.r.recognize_google(
+                result = self.r.recognize_google(
                     audio, language=self.language, show_all=True)
-                return text
-            except Exception:
+                return result
+            except Exception as e:
+                print(e)
                 return None

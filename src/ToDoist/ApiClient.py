@@ -66,13 +66,19 @@ class ApiClientProvider:
             ProjectEntity, {"discord_channel_id": channel_id})
 
         if project:
-            api = TodoistAPI(project.todoist_token)
-
-            proj_id = None
-            if project.todoist_project_id:
-                proj_id = project.todoist_project_id
-
-            client = ApiClient(api, proj_id)
+            access_token = project.todoist_token
+            project_id = project.todoist_project_id
+            client = self.create_client(access_token, project_id)
             return client
 
         return None
+
+    def create_client(self, access_token, project_id):
+        api = TodoistAPI(access_token)
+
+        proj_id = None
+        if project_id:
+            proj_id = project_id
+
+        client = ApiClient(api, proj_id)
+        return client
