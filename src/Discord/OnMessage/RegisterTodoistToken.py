@@ -7,6 +7,7 @@ from src.Discord.DiscordClient import OnMessageComponent
 class RegisterToDoistToken(OnMessageComponent):
     """ Adding todoist api token to channel
     """
+    
     async def process(self, msg: discord.Message, content: str) -> None:
         token = content
 

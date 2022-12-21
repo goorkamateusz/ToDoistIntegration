@@ -1,25 +1,27 @@
 import discord
 from src.LanguageProcessor.Processor import Result
 from src.ToDoist.ApiClient import ApiClient
+from src.Discord.Reactions import managed_msg_reaction, error_reaction
 from src.Database.Entities import TaskEntity
 from src.Discord.DiscordClient import OnMessageComponent
 
 
-class ModifyTask(OnMessageComponent):
-    """ Modify task content
+class AddComment(OnMessageComponent):
+    """ Add comment to task
     """
 
     async def process(self, msg: discord.Message, content: str) -> None:
         entity: TaskEntity = self.db.find_one(
             TaskEntity, {"discord_thread_id": msg.channel.id})
 
-        todoist: ApiClient = self.todoist.get_client(msg.channel.id)
+        todoist: ApiClient = self.todoist.get_client(entity.discord_channel_id)
 
-        if todoist.update_task(entity.todoist_task_id, content):
-            await self.report(entity, f"Zmodyfikowano zadanie na: {content}")
+        comment_content = f"🤖 {msg.author.name}: {content}"
+
+        if todoist.add_comment(entity.todoist_task_id, comment_content):
+            await msg.add_reaction(managed_msg_reaction)
         else:
-            communicate = "Coś poszło nie tak... Nie udało się zamknąć zadania"
-            await self.report(entity, communicate)
+            await msg.add_reaction(error_reaction)
 
     async def process_command(self, msg: discord.Message, command: Result):
         await self.process(msg, command.dict["content"])

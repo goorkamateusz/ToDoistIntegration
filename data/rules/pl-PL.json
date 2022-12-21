@@ -8,8 +8,23 @@
         "(dodaj|stwórz|utwórz|zapisz|wprowadź) zadanie [label] o treści [content]"
     ],
     "done": [
-        "(zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij) (zadanie)? [content]",
-        "odznacz za skończone (zadanie)? [content]",
-        "zadanie [content] (zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij)"
+        "(zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij)",
+        "(zaznacz|odznacz) za skończone",
+        "zadanie (zakończono|odznaczono|skończono|skończone|gotowe|usuń|zamknij)"
+    ],
+    "update": [
+        "(zmodyfikuj|zmień) (zadanie|treść|tresc) [content]"
+    ],
+    "add_comment": [
+        "(dodaj|stwórz) komentarz [content]",
+        "skomentuj zadanie [content]"
+    ],
+    "help": [
+        "pomóż mi",
+        "help",
+        "(potrzebuję|potrzebuje) pomocy"
+    ],
+    "select": [
+        "wybierz zadanie [content]"
     ]
 }

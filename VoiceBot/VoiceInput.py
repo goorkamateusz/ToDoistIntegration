@@ -6,12 +6,15 @@ class VoiceInput:
         self.r: sr.Recognizer = sr.Recognizer()
         self.language: str = 'pl-PL'
 
-    def get_text(self, msg: str = "Słucham...") -> str:
+    def get_text(self, thread) -> str:
         with sr.Microphone() as source:
             try:
-                print(msg)
+                thread.msg = "Słucham"
                 audio = self.r.listen(source)
-                text = self.r.recognize_google(audio, language=self.language)
-                return text
+                thread.msg = "Przetwarzam"
+                result = self.r.recognize_google(
+                    audio, language=self.language, show_all=True)
+                return result
             except Exception as e:
+                print(e)
                 return None

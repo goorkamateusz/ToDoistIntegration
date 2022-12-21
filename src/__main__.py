@@ -1,8 +1,8 @@
-from src.Discord.DiscordBot import main
-from src.config import logging_file
+import sys
 import logging
 from logging.handlers import RotatingFileHandler
-import sys
+from src.config import logging_file
+from src.Database.MongoDbClientProvider import MongoDbClientProvider
 
 
 def config_logging():
@@ -10,19 +10,25 @@ def config_logging():
 
     stream = logging.StreamHandler(sys.stdout)
     stream.setFormatter(formatter)
+    stream.setLevel(logging.INFO)
     logging.getLogger().addHandler(stream)
 
     if logging_file:
         file = RotatingFileHandler(
             filename=logging_file, maxBytes=500 * 1024, encoding='utf-8')
         file.setFormatter(formatter)
+        file.setLevel(logging.INFO)
         logging.getLogger().addHandler(file)
-
-        logging.getLogger().setLevel(logging.INFO)
 
 
 if __name__ == "__main__":
     config_logging()
+    MongoDbClientProvider().try_to_start_connection()
+
+    # hotfix
+    from src.Discord.Container import Container
+    from src.Discord.DiscordBot import main
+    Container.apiClientProvider.db = Container.database
 
     logging.info("App started")
     logging.info("-" * 60)

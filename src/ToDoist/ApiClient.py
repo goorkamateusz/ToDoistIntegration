@@ -34,6 +34,12 @@ class ApiClient:
     def select_project(self, project_id: str) -> None:
         self.__project_id = project_id
 
+    def add_comment(self, task_id: str, content: str) -> bool:
+        return self._api.add_comment(task_id=task_id, content=content)
+
+    def delete_task(self, task_id: str) -> bool:
+        return self._api.delete_task(task_id)
+
 
 class ApiClientProvider:
     def __init__(self) -> None:
@@ -63,13 +69,19 @@ class ApiClientProvider:
             ProjectEntity, {"discord_channel_id": channel_id})
 
         if project:
-            api = TodoistAPI(project.todoist_token)
-
-            proj_id = None
-            if project.todoist_project_id:
-                proj_id = project.todoist_project_id
-
-            client = ApiClient(api, proj_id)
+            access_token = project.todoist_token
+            project_id = project.todoist_project_id
+            client = self.create_client(access_token, project_id)
             return client
 
         return None
+
+    def create_client(self, access_token, project_id):
+        api = TodoistAPI(access_token)
+
+        proj_id = None
+        if project_id:
+            proj_id = project_id
+
+        client = ApiClient(api, proj_id)
+        return client

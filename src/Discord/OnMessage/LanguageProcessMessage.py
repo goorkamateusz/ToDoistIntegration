@@ -6,6 +6,8 @@ from src.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
 class LanguageProcessMessage(OnMessageComponent):
+    """ Process natural language command
+    """
 
     def __init__(self,
                  client,
@@ -38,3 +40,5 @@ class LanguageProcessMessage(OnMessageComponent):
         if command_id in discord.on_messages:
             component: OnMessageComponent = discord.on_messages[command_id]
             await component.process_command(msg, command)
+        if command_id == "selected":
+            await msg.reply("Wybierania zadań nie jest obsłużone tekstowo")

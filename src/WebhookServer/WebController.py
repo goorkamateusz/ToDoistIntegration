@@ -35,3 +35,11 @@ class WebController:
             json = await request.json()
             await self._eventQueue.put(json)
         return web.Response(status=200)
+
+    async def test(self, request: web.Request):
+        print(request.body_exists)
+
+        if request.body_exists:
+            print(await request.json())
+
+        return web.Response(status=200)

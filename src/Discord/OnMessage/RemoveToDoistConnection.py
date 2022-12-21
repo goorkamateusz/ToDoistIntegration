@@ -5,6 +5,9 @@ from src.Discord.DiscordClient import OnMessageComponent
 
 
 class RemoveToDoistConnection(OnMessageComponent):
+    """ Remove ToDoist connection
+    """
+    
     async def process(self, msg: discord.Message, content: str) -> None:
         result = self.db.delete_one(
             ProjectEntity, {"discord_channel_id": msg.channel.id})

@@ -8,7 +8,3 @@ class Container:
     database: Database = Database()
     languageProcessor: LanguageProcessor = LanguageProcessor(
         "data/rules/pl-PL.json")
-
-
-# hotfix
-Container.apiClientProvider.db = Container.database

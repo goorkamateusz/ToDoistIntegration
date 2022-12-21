@@ -7,6 +7,7 @@ from src.Discord.DiscordClient import OnMessageComponent
 class SelectToDoistProject(OnMessageComponent):
     """ Select ToDoist project to channel
     """
+
     async def process(self, msg: discord.Message, content: str) -> None:
         channel = msg.channel
         filter = {"discord_channel_id": channel.id}
