@@ -16,7 +16,10 @@ class VoiceCommandsProcessor:
         )
         self.__voice = VoiceOutput()
         self.processors = {
-            "add": self.add_task
+            "add": self.add_task,
+            "select": self.select_task,
+            "delete": self.delete_task,
+            "update": self.delete_task,
         }
 
     def process(self, commands: List[Result]):
@@ -33,3 +36,12 @@ class VoiceCommandsProcessor:
     def add_task(self, c: Result):
         self.__client.add_task(c.dict["content"])
         print("dodano zadanie")
+
+    def select_task(self, c: Result):
+        pass
+
+    def delete_task(self, c: Result):
+        pass
+
+    def update_task(self, c: Result):
+        pass

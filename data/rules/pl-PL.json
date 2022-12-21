@@ -23,5 +23,8 @@
         "pomóż mi",
         "help",
         "(potrzebuję|potrzebuje) pomocy"
+    ],
+    "select": [
+        "wybierz zadanie [content]"
     ]
 }
