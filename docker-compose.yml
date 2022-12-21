@@ -12,7 +12,7 @@ services:
     volumes:
       - /var/log:/var/log
     environment:
-      - connection_string=mongodb://${db_root_user}:${db_root_pass}@database0:40250/
+      - connection_string=mongodb://database0:40250,db1:40251,db2:40252/todoist
       - todoist_client_id=${todoist_client_id}
       - todoist_client_secret=${todoist_client_secret}
       - todoist_scope=${todoist_scope}
@@ -20,23 +20,21 @@ services:
       - logging_file=${logging_file}
 
   database0:
-    image: mongo
+    image: mongo:6.0
     container_name: database0
     command: mongod --port 40250 --replSet dbrs
-    volumes:
-      - ./bash/rs-setup.sh:/scripts/rs-setup.sh
     ports:
       - 40250:40250
 
   db1:
-    image: mongo
+    image: mongo:6.0
     container_name: db1
     command: mongod --port 40251 --replSet dbrs
     ports:
       - 40251:40251
 
   db2:
-    image: mongo
+    image: mongo:6.0
     container_name: db2
     command: mongod --port 40252 --replSet dbrs
     ports:

@@ -1,7 +1,7 @@
 import logging
 from time import sleep
 from typing import Any
-from pymongo import MongoClient, errors
+from pymongo import MongoClient, ReadPreference, errors
 from src.config import connection_string
 
 
@@ -18,8 +18,11 @@ class MongoDbClientProvider:
 
     def start_connection(self) -> bool:
         try:
-            client = MongoClient(connection_string,
-                                 serverSelectionTimeoutMS=5000)
+            client = MongoClient(
+                connection_string,
+                serverSelectionTimeoutMS=5000,
+                replicaSet="dbrs",
+                read_preference=ReadPreference.SECONDARY_PREFERRED)
             client.server_info()
             self.__client = client
             return True
