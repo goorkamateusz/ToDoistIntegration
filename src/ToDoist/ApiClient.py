@@ -37,6 +37,9 @@ class ApiClient:
     def add_comment(self, task_id: str, content: str) -> bool:
         return self._api.add_comment(task_id=task_id, content=content)
 
+    def delete_task(self, task_id: str) -> bool:
+        return self._api.delete_task(task_id)
+
 
 class ApiClientProvider:
     def __init__(self) -> None:
