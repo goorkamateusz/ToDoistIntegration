@@ -9,5 +9,6 @@ class VoiceOutput:
         self.engine.setProperty('voice', self.voices[0].id)
 
     def speak(self, text: str) -> None:
+        print(text)
         self.engine.say(text)
         self.engine.runAndWait()

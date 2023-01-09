@@ -7,7 +7,7 @@ from VoiceBot.VoiceOutput import VoiceOutput
 from src.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
-class myThread (threading.Thread):
+class myThread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.con: bool = True
@@ -29,7 +29,7 @@ def process_alterantives(processor: LanguageProcessor, result) -> List[Result]:
     commands: List[Result] = list()
     for alternative in result["alternative"]:
         transcript = alternative["transcript"]
-        print(transcript)
+        print(f"Rozumiano: {transcript}")
         command: List[Result] = processor.process(transcript)
         if command is not None:
             commands.extend(command)
@@ -42,28 +42,32 @@ def validate_input(result):
 
 if __name__ == "__main__":
     input = VoiceInput()
+    output = VoiceOutput()
     processor = LanguageProcessor("data/rules/pl-PL.json")
     commands_processor = VoiceCommandsProcessor()
-    speech = myThread()
-    speech.start()
+    thread = myThread()
+    thread.start()
 
     try:
         while True:
-            speech.print = True
-            result: Dict[str, Any] = input.get_text(speech)
+            thread.print = True
+            result: Dict[str, Any] = input.get_text(thread)
 
             if validate_input(result):
                 print()
-                speech.print = False
+                thread.print = False
                 commands = process_alterantives(processor, result)
                 commands_processor.process(commands)
 
-                if commands is not None:
-                    for c in commands:
-                        print(c)
+                if commands is not None and len(commands) > 0:
+                    output.speak(f"Polecenie: {commands[0]}")
+                else:
+                    output.speak("Nie rozpoznano polecenia")
 
     except KeyboardInterrupt:
-        print('You pressed ctrl+c')
-        pass
+        print('Nacisnąłeś ctrl+c')
+        thread.con = False
 
-    speech.con = False
+    except Exception as e:
+        thread.con = False
+        raise e

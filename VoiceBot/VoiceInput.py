@@ -16,5 +16,5 @@ class VoiceInput:
                     audio, language=self.language, show_all=True)
                 return result
             except Exception as e:
-                print(e)
+                print(f"Błąd: {e}")
                 return None
