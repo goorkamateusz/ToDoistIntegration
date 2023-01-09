@@ -29,7 +29,7 @@ def process_alterantives(processor: LanguageProcessor, result) -> List[Result]:
     commands: List[Result] = list()
     for alternative in result["alternative"]:
         transcript = alternative["transcript"]
-        print(f"Rozumiano: {transcript}")
+        print(f": {transcript}")
         command: List[Result] = processor.process(transcript)
         if command is not None:
             commands.extend(command)
@@ -60,7 +60,7 @@ if __name__ == "__main__":
                 commands_processor.process(commands)
 
                 if commands is not None and len(commands) > 0:
-                    output.speak(f"Polecenie: {commands[0]}")
+                    print(f"{commands[0]}")
                 else:
                     output.speak("Nie rozpoznano polecenia")
 

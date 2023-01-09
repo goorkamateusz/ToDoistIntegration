@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 import logging
 from requests import HTTPError
 from todoist_api_python.api import Project, Task, TodoistAPI
@@ -39,6 +39,9 @@ class ApiClient:
 
     def delete_task(self, task_id: str) -> bool:
         return self._api.delete_task(task_id)
+
+    def get_tasks(self) -> List[Task]:
+        return self._api.get_tasks(project_id=self.__project_id)
 
 
 class ApiClientProvider:

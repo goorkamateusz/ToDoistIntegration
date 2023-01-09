@@ -12,8 +12,11 @@
         "(zaznacz|odznacz) za skończone",
         "zadanie (zakończono|odznaczono|skończono|skończone|gotowe|usuń|zamknij)"
     ],
+    "delete": [
+        "(usuń|skasuj|zapomnij) (zadanie)?"
+    ],
     "update": [
-        "(zmodyfikuj|zmień) (zadanie|treść|tresc) [content]"
+        "(zmodyfikuj|zmień) (zadanie|treść|tresc) na [content]"
     ],
     "add_comment": [
         "(dodaj|stwórz) komentarz [content]",
@@ -25,6 +28,6 @@
         "(potrzebuję|potrzebuje) pomocy"
     ],
     "select": [
-        "wybierz zadanie [content]"
+        "(wybierz|znajdź|zaznacz) (zadanie)? [content]"
     ]
 }
