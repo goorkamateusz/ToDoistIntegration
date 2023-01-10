@@ -24,6 +24,7 @@ class VoiceCommandsProcessor:
             "done": self.done_task,
             "delete": self.delete_task,
             "update": self.update_task,
+            "add_comment": self.add_comment,
         }
         self.__selected_task: Task = None
 
@@ -86,3 +87,13 @@ class VoiceCommandsProcessor:
         content = c.dict["content"]
         self.__client.update_task(self.__selected_task.id, content)
         self.__voice.speak("Zedytowałeś zadanie")
+
+    def add_comment(self, c: Result):
+
+        if self.__selected_task is None:
+            self.__voice.speak("Nie wybrałeś zadania")
+            return
+
+        content = c.dict["content"]
+        self.__client.add_comment(self.__selected_task.id, content)
+        self.__voice.speak("Dodałeś komentarz")

@@ -10,7 +10,7 @@ class VoiceInput:
         with sr.Microphone() as source:
             try:
                 thread.msg = "Słucham"
-                audio = self.r.listen(source)
+                audio = self.r.listen(source, phrase_time_limit=6)
                 thread.msg = "Przetwarzam"
                 result = self.r.recognize_google(
                     audio, language=self.language, show_all=True)

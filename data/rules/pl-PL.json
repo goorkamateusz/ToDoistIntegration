@@ -9,14 +9,16 @@
     ],
     "done": [
         "(zakończ|odznacz|skończono|skończone|gotowe|usuń|zamknij)",
-        "(zaznacz|odznacz) za skończone",
-        "zadanie (zakończono|odznaczono|skończono|skończone|gotowe|usuń|zamknij)"
+        "(zaznacz|odznacz) (zadanie)? za skończone",
+        "(zaznacz|odznacz) (zadanie|to)? jako wykonane",
+        "zadanie (zakończono|odznaczono|skończono|skończone|gotowe|usuń|zamknij)",
+        "(skończyłem|skończyłam) (to)? zadanie"
     ],
     "delete": [
         "(usuń|skasuj|zapomnij) (zadanie)?"
     ],
     "update": [
-        "(zmodyfikuj|zmień) (zadanie|treść|tresc) na [content]"
+        "(zmodyfikuj|zmień|aktualizuj) (zadanie|treść|tresc)? na [content]"
     ],
     "add_comment": [
         "(dodaj|stwórz) komentarz [content]",
