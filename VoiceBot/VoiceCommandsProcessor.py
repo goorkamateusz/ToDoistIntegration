@@ -4,8 +4,8 @@ import difflib
 
 from todoist_api_python.models import Task
 
-from src.LanguageProcessor.Processor import Result
-from src.ToDoist.ApiClient import ApiClientProvider
+from Common.LanguageProcessor.Processor import Result
+from Common.ToDoist.ApiClient import ApiClientProvider
 from VoiceBot.VoiceOutput import VoiceOutput
 
 

@@ -4,7 +4,7 @@ from typing import Any, Dict, List
 from VoiceBot.VoiceCommandsProcessor import VoiceCommandsProcessor
 from VoiceBot.VoiceInput import VoiceInput
 from VoiceBot.VoiceOutput import VoiceOutput
-from src.LanguageProcessor.Processor import LanguageProcessor, Result
+from Common.LanguageProcessor.Processor import LanguageProcessor, Result
 
 
 class myThread(threading.Thread):
