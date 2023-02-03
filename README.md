@@ -6,11 +6,15 @@ Integration ToDoist app with Discord and implemented local voice bot interface.
 
 - [ToDoist Integration](#todoist-integration)
   - [Table of content](#table-of-content)
-  - [Usage](#usage)
+  - [Discord Bot](#discord-bot)
+    - [Env](#env)
+  - [Voice Bot](#voice-bot)
+    - [Env](#env-1)
   - [Author](#author)
 
-## Usage
+## Discord Bot
 
+### Env
 Create file with all private data to connect ToDoist and Discord bot.
 
 `.env`
@@ -23,6 +27,15 @@ todoist_client_secret="..."
 todoist_scope="..."
 
 discord_token="..."
+```
+
+## Voice Bot
+
+### Env
+
+```
+export voice_access_token="..."
+export voice_project_id=".."
 ```
 
 ## Author
